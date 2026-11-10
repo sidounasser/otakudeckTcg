@@ -1,0 +1,14 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/.well-known/discord"
+  to = "/discord-verify.txt"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/.well-known/discord"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "no-cache"

@@ -1,0 +1,4567 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aether Revolut TCG — Collection & Holographic Cards</title>
+  <!-- Police Google Fonts : Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --sky-top: #3b82f6;
+      --sky-mid: #60a5fa;
+      --sky-bottom: #93c5fd;
+      --pure-white: #ffffff;
+      --deep-black: #111111;
+      --violet-accent: #6366f1;
+      --card-w: 250px;
+      --card-h: 360px;
+      --neon-cyan: #22d3ee;
+      --neon-purple: #c084fc;
+      --neon-gold: #fbbf24;
+      --text-muted: #94a3b8;
+      --border-subtle: rgba(148, 163, 184, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    /* ==========================================================================
+       1. FOND & PALETTE DE COULEURS (AÉRIEN & LUMINEUX — 100VH OVERFLOW HIDDEN)
+       ========================================================================== */
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 52%, var(--sky-bottom) 100%);
+      color: var(--pure-white);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Effet de nuages aériens doux dans le ciel */
+    .sky-clouds {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        radial-gradient(ellipse 55% 32% at 12% 88%, rgba(255, 255, 255, 0.55) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 28% at 88% 82%, rgba(255, 255, 255, 0.48) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 22% at 78% 48%, rgba(255, 255, 255, 0.25) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 25% at 22% 58%, rgba(255, 255, 255, 0.22) 0%, transparent 65%);
+    }
+
+    /* ==========================================================================
+       2. BARRE DE NAVIGATION (STYLE iOS 18 LIQUID GLASS & REVOLUT)
+       ========================================================================== */
+    .revolut-navbar {
+      position: relative;
+      z-index: 30;
+      max-width: 1200px;
+      margin: 18px auto 0;
+      padding: 12px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.28);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      border-radius: 999px;
+      box-shadow:
+        0 12px 36px rgba(15, 23, 42, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--deep-black);
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-left: 6px;
+    }
+
+    .nav-logo-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      box-shadow: 0 4px 12px rgba(0, 122, 255, 0.35);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+      background: rgba(255, 255, 255, 0.32);
+      padding: 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+    }
+
+    .nav-links a {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--deep-black);
+      text-decoration: none;
+      padding: 7px 15px;
+      border-radius: 999px;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-wallet-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1c1c1e;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-wallet-pill:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-login {
+      background: transparent;
+      border: none;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--deep-black);
+      cursor: pointer;
+      padding: 8px 12px;
+      transition: opacity 0.2s ease;
+    }
+
+    .btn-login:hover {
+      opacity: 0.7;
+    }
+
+    .btn-signup {
+      background: var(--deep-black);
+      color: var(--pure-white);
+      border: none;
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease;
+    }
+
+    .btn-signup:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(17, 17, 17, 0.25);
+    }
+
+    /* ==========================================================================
+       3. TYPOGRAPHIE & SUPERPOSITION (EFFET DE PROFONDEUR + WIDGETS iOS 18)
+       ========================================================================== */
+    .hero-stage {
+      position: relative;
+      max-width: 1240px;
+      height: calc(100vh - 96px);
+      margin: 0 auto;
+      padding: 0 36px;
+    }
+
+    /* Titre géant en arrière-plan (z-index: 2) */
+    .hero-giant-title {
+      position: relative;
+      z-index: 2;
+      font-size: 4.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.04;
+      color: var(--pure-white);
+      max-width: 820px;
+      margin-top: 16px;
+      margin-left: 5%;
+      pointer-events: none;
+      text-shadow: 0 8px 32px rgba(30, 64, 175, 0.14);
+    }
+
+    /* Bloc texte 3 lignes + boutons pilules iOS à gauche */
+    .hero-left-Copy {
+      position: relative;
+      z-index: 12;
+      margin-top: 22px;
+      margin-left: 5%;
+      max-width: 335px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .ios-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.26);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      font-size: 12px;
+      font-weight: 600;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    }
+
+    .ios-live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34C759;
+      box-shadow: 0 0 8px #34C759;
+    }
+
+    .hero-description {
+      font-size: 1.01rem;
+      line-height: 1.55;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-explore-pill {
+      background: var(--deep-black);
+      color: var(--pure-white);
+      border: none;
+      border-radius: 999px;
+      padding: 13px 24px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(17, 17, 17, 0.22);
+      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease;
+    }
+
+    .btn-explore-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(17, 17, 17, 0.34);
+    }
+
+    .btn-ios-glass-pill {
+      background: rgba(255, 255, 255, 0.28);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      color: var(--pure-white);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-ios-glass-pill:hover {
+      background: rgba(255, 255, 255, 0.42);
+      transform: translateY(-2px);
+    }
+
+    /* Widgets flottants iOS 18 à droite de l'écran d'accueil */
+    .hero-ios-widgets {
+      position: absolute;
+      right: 36px;
+      bottom: 42px;
+      z-index: 12;
+      width: 268px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .ios-spatial-card {
+      background: rgba(255, 255, 255, 0.36);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 24px;
+      padding: 16px 18px;
+      box-shadow:
+        0 18px 40px rgba(15, 23, 42, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s ease;
+    }
+
+    .ios-spatial-card:hover {
+      transform: translateY(-3px) scale(1.01);
+      background: rgba(255, 255, 255, 0.48);
+    }
+
+    .ios-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .ios-squircle-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .ios-squircle-blue { background: linear-gradient(135deg, #007AFF, #5AC8FA); }
+    .ios-squircle-purple { background: linear-gradient(135deg, #AF52DE, #5856D6); }
+    .ios-squircle-green { background: linear-gradient(135deg, #34C759, #30D158); }
+    .ios-squircle-orange { background: linear-gradient(135deg, #FF9500, #FFCC00); }
+
+    .ios-card-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: #1c1c1e;
+      background: rgba(255, 255, 255, 0.75);
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+
+    .ios-card-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(15, 23, 42, 0.68);
+    }
+
+    .ios-card-big {
+      font-size: 19px;
+      font-weight: 800;
+      color: #111111;
+      letter-spacing: -0.02em;
+      margin-top: 2px;
+    }
+
+    .ios-progress-track {
+      width: 100%;
+      height: 6px;
+      background: rgba(15, 23, 42, 0.12);
+      border-radius: 999px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    .ios-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #007AFF, #5856D6);
+      border-radius: 999px;
+      transition: width 0.35s ease;
+    }
+
+    /* ==========================================================================
+       4. PERSONNAGE CENTRAL EN SUPERPOSITION & INFOS FLOTTANTES (SANS CADRE BLANC)
+       ========================================================================== */
+    .hero-centerpiece {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 560px;
+      height: 82vh;
+      max-height: 680px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      z-index: 8;
+      pointer-events: none;
+    }
+
+    /* Personnage HD détouré (PNG transparent sans arche ni fond noir, z-index: 7) */
+    .hero-character-cutout {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 560px;
+      height: 100%;
+      z-index: 7;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .hero-character-cutout img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center bottom;
+      filter: drop-shadow(0 18px 38px rgba(15, 23, 42, 0.28));
+      animation: heroFloatSubtle 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroFloatSubtle {
+      0% { transform: scale(1) translateY(0px); }
+      100% { transform: scale(1.015) translateY(-4px); }
+    }
+
+    /* Conteneur central flottant sans bordure blanche ni cadre rectangulaire */
+    .revolut-glass-frame {
+      position: relative;
+      z-index: 10;
+      width: 356px;
+      height: 80%;
+      margin-bottom: 18px;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: auto;
+    }
+
+    .glass-top-spacer {
+      height: 32%;
+    }
+
+    /* Valeur mise en avant au milieu du cadre */
+    .glass-center-metric {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+      text-shadow: 0 2px 16px rgba(15, 23, 42, 0.35);
+    }
+
+    .glass-metric-sub {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.92);
+      letter-spacing: 0.01em;
+    }
+
+    .glass-metric-value {
+      font-size: 2.35rem;
+      font-weight: 800;
+      color: var(--pure-white);
+      letter-spacing: -0.02em;
+    }
+
+    .btn-details-white-pill {
+      margin-top: 4px;
+      background: var(--pure-white);
+      color: var(--deep-black);
+      border: none;
+      border-radius: 999px;
+      padding: 9px 24px;
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-details-white-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    /* Widget rectangulaire blanc pur tout en bas du cadre */
+    .glass-bottom-widget {
+      width: 100%;
+      background: var(--pure-white);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .glass-bottom-widget:hover {
+      transform: translateY(-2px);
+    }
+
+    .widget-left-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .widget-violet-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--violet-accent);
+      color: var(--pure-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+    }
+
+    .widget-titles {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .widget-main-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--deep-black);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .widget-time-sub {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #64748b;
+    }
+
+    .widget-right-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--deep-black);
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       STUDIO APPLICATION TCG (SIDEBAR GAUCHE STYLE SLMOBBIN + CANVAS LUMINEUX)
+       ========================================================================== */
+    .tcg-drawer-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: #ffffff;
+      color: #0f172a;
+      overflow: hidden;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .tcg-drawer-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* Mode Obsidian Holo (optionnel en 1 clic dans l'en-tête) */
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] {
+      background: #090d16;
+      color: #f8fafc;
+    }
+
+    /* ==========================================================================
+       BARRE LATÉRALE GAUCHE (INSPIRÉE DE SLMOBBIN / LINEAR / MIXPANEL)
+       ========================================================================== */
+    .sl-sidebar {
+      width: 264px;
+      min-width: 264px;
+      height: 100vh;
+      background: #fbfbfc;
+      border-right: 1px solid #e6e8ec;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 14px 12px 12px;
+      z-index: 60;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: width 0.24s cubic-bezier(0.22, 1, 0.36, 1), min-width 0.24s cubic-bezier(0.22, 1, 0.36, 1), padding 0.24s ease, transform 0.24s ease;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-sidebar {
+      background: #0d121f;
+      border-right-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .sl-sidebar.collapsed {
+      width: 0;
+      min-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+      border-right: none;
+      overflow: hidden;
+    }
+
+    .sl-sidebar-top {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      flex: 1;
+    }
+
+    /* 1. En-tête Workspace (SLMobbin / All Project Data) */
+    .sl-brand-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .sl-brand-header:hover {
+      background: rgba(15, 23, 42, 0.04);
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-brand-header:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .sl-brand-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .sl-brand-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #111827;
+      flex-shrink: 0;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-brand-logo {
+      color: #f8fafc;
+    }
+
+    .sl-brand-titles {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+      min-width: 0;
+    }
+
+    .sl-brand-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.01em;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-brand-name {
+      color: #f8fafc;
+    }
+
+    .sl-brand-sub {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: #6b7280;
+    }
+
+    .sl-chevron {
+      color: #6b7280;
+      font-size: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    /* 2. Bouton Violet Principal (+ Create New -> + Ouvrir un Booster) */
+    .sl-btn-create {
+      width: 100%;
+      background: #4f46e5;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(79, 70, 229, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: background 0.16s ease, transform 0.14s ease, box-shadow 0.16s ease;
+    }
+
+    .sl-btn-create:hover {
+      background: #4338ca;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.36);
+    }
+
+    .sl-btn-create-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 3. Barre de recherche intégrée (Search ⌘ + K) */
+    .sl-search-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      color: #374151;
+      transition: background 0.15s ease;
+    }
+
+    .sl-search-row:hover,
+    .sl-search-row:focus-within {
+      background: rgba(15, 23, 42, 0.045);
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-search-row {
+      color: #cbd5e1;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-search-row:hover,
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-search-row:focus-within {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .sl-search-input {
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      color: inherit;
+      width: 100%;
+      outline: none;
+    }
+
+    .sl-search-input::placeholder {
+      color: #374151;
+      font-weight: 500;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-search-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .sl-kbd-shortcut {
+      font-size: 11px;
+      font-weight: 600;
+      color: #9ca3af;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* 4. Liste de navigation principale */
+    .sl-nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sl-nav-item {
+      width: 100%;
+      border: none;
+      background: transparent;
+      color: #1f2937;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 10px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.14s ease, color 0.14s ease;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-nav-item {
+      color: #e2e8f0;
+    }
+
+    .sl-nav-item:hover {
+      background: rgba(15, 23, 42, 0.045);
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-nav-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .sl-nav-item.active {
+      background: #eef2ff;
+      color: #4f46e5;
+      font-weight: 600;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-nav-item.active {
+      background: rgba(79, 70, 229, 0.22);
+      color: #818cf8;
+    }
+
+    .sl-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .sl-nav-icon {
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #4b5563;
+      flex-shrink: 0;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-nav-icon {
+      color: #94a3b8;
+    }
+
+    .sl-nav-item.active .sl-nav-icon {
+      color: #4f46e5;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-nav-item.active .sl-nav-icon {
+      color: #818cf8;
+    }
+
+    /* Sous-éléments indentés (style Events / Users / Lexicon sous Data) */
+    .sl-subnav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      padding-left: 26px;
+      overflow: hidden;
+      transition: max-height 0.22s ease;
+    }
+
+    .sl-subnav-list.collapsed {
+      display: none;
+    }
+
+    .sl-subnav-item {
+      width: 100%;
+      border: none;
+      background: transparent;
+      color: #374151;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 7px 10px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.14s ease, color 0.14s ease;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-subnav-item {
+      color: #cbd5e1;
+    }
+
+    .sl-subnav-item:hover {
+      background: rgba(15, 23, 42, 0.045);
+      color: #111827;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-subnav-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+    }
+
+    .sl-subnav-item.active {
+      background: rgba(79, 70, 229, 0.09);
+      color: #4f46e5;
+      font-weight: 600;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-subnav-item.active {
+      background: rgba(99, 102, 241, 0.22);
+      color: #a5b4fc;
+    }
+
+    .sl-count-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: #6b7280;
+      background: rgba(15, 23, 42, 0.05);
+      padding: 1px 6px;
+      border-radius: 999px;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-count-badge {
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .sl-subnav-item.active .sl-count-badge {
+      background: rgba(79, 70, 229, 0.15);
+      color: #4f46e5;
+    }
+
+    .sl-divider {
+      height: 1px;
+      background: #eceef2;
+      margin: 6px 4px;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-divider {
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    /* 5. Section PINNED (⌄ PINNED -> 🌱 Starter Board) */
+    .sl-pinned-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 8px 4px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #6b7280;
+    }
+
+    /* 6. Pied de barre latérale (Bouton Or "Upgrade Plan" + Barre d'icônes) */
+    .sl-sidebar-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 10px;
+    }
+
+    .sl-btn-upgrade {
+      width: 100%;
+      background: #f5bf38;
+      color: #111827;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(245, 191, 56, 0.3);
+      transition: background 0.16s ease, transform 0.14s ease;
+    }
+
+    .sl-btn-upgrade:hover {
+      background: #eab308;
+      transform: translateY(-1px);
+    }
+
+    .sl-bottom-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2px 4px 0;
+      border-top: 1px solid #eceef2;
+      padding-top: 8px;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-bottom-toolbar {
+      border-top-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .sl-toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .sl-icon-btn {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      border: none;
+      background: transparent;
+      color: #4b5563;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-icon-btn {
+      color: #94a3b8;
+    }
+
+    .sl-icon-btn:hover {
+      background: rgba(15, 23, 42, 0.06);
+      color: #111827;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .sl-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .sl-notif-dot {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ef4444;
+      box-shadow: 0 0 0 1.5px #fbfbfc;
+    }
+
+    /* ==========================================================================
+       ESPACE DE TRAVAIL PRINCIPAL À DROITE (SANS FOND GRIS TERNE)
+       ========================================================================== */
+    .studio-workspace-main {
+      flex: 1;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(224, 242, 254, 0.55) 0%, transparent 42%),
+        radial-gradient(circle at 88% 8%, rgba(243, 232, 255, 0.5) 0%, transparent 42%),
+        radial-gradient(circle at 50% 95%, rgba(254, 243, 199, 0.35) 0%, transparent 50%),
+        #ffffff;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .studio-workspace-main {
+      background:
+        radial-gradient(circle at 15% 0%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 85% 10%, rgba(168, 85, 247, 0.12) 0%, transparent 45%),
+        #090d16;
+    }
+
+    .drawer-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 12px 28px;
+      background: rgba(255, 255, 255, 0.86);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid #eef0f4;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .drawer-topbar {
+      background: rgba(13, 18, 31, 0.85);
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .studio-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #6b7280;
+    }
+
+    .studio-breadcrumb strong {
+      color: #111827;
+      font-weight: 700;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .studio-breadcrumb strong {
+      color: #f8fafc;
+    }
+
+    .btn-back-hero {
+      background: #ffffff;
+      color: #111827;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 7px 13px;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .btn-back-hero {
+      background: rgba(255, 255, 255, 0.06);
+      color: #f8fafc;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-back-hero:hover {
+      background: #f9fafb;
+      transform: translateY(-1px);
+    }
+
+    .hud-stats {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hud-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      padding: 6px 12px;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .hud-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .hud-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+      color: #6b7280;
+      display: block;
+    }
+
+    .hud-value {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #111827;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .hud-value {
+      color: #f8fafc;
+    }
+
+    .coins-value {
+      color: #d97706 !important;
+    }
+
+    .passive-rate {
+      font-size: 10px;
+      color: #16a34a;
+      font-weight: 800;
+      margin-left: 4px;
+      background: rgba(22, 163, 74, 0.12);
+      padding: 2px 6px;
+      border-radius: 999px;
+    }
+
+    .btn-sell-dupes {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      background: rgba(254, 243, 199, 0.65);
+      color: #b45309;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .btn-sell-dupes:hover:not(:disabled) {
+      background: rgba(254, 243, 199, 1);
+      transform: translateY(-1px);
+    }
+
+    .btn-sell-dupes:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .btn-admin-toggle {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      background: #4f46e5;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .btn-admin-toggle:hover {
+      background: #4338ca;
+      transform: translateY(-1px);
+    }
+
+    .main-wrapper {
+      width: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 24px 32px 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* ==========================================================================
+       ZONE GACHA & BOOSTER (STUDIO HOLOGRAPHIQUE ÉPURÉ)
+       ========================================================================== */
+    .gacha-arena {
+      position: relative;
+      background: linear-gradient(135deg, rgba(238, 242, 255, 0.7) 0%, rgba(250, 245, 255, 0.7) 50%, rgba(240, 249, 255, 0.7) 100%);
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 24px 28px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .gacha-arena {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.55) 0%, rgba(15, 23, 42, 0.75) 100%);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .gacha-arena.collapsed-stage .booster-stage {
+      display: none;
+    }
+
+    .gacha-arena.collapsed-stage .gacha-top-bar {
+      margin-bottom: 0;
+    }
+
+    .arena-flash {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 30;
+    }
+
+    .arena-flash.active {
+      animation: flashBurst 0.85s ease-out forwards;
+    }
+
+    @keyframes flashBurst {
+      0% { opacity: 0; transform: scale(0.8); }
+      25% { opacity: 0.95; transform: scale(1.05); }
+      100% { opacity: 0; transform: scale(1.4); }
+    }
+
+    .gacha-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .odds-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .odd-badge {
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 6px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+
+    .odd-common { color: #64748b; }
+    .odd-rare { color: #0284c7; background: rgba(224, 242, 254, 0.85); }
+    .odd-holo { color: #9333ea; background: rgba(243, 232, 255, 0.85); }
+    .odd-secret { color: #b45309; background: rgba(254, 243, 199, 0.95); border-color: rgba(245, 158, 11, 0.35); }
+
+    .booster-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 410px;
+      position: relative;
+    }
+
+    .booster-pack-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      z-index: 10;
+    }
+
+    .booster-pack-3d {
+      position: relative;
+      width: 214px;
+      height: 306px;
+      border-radius: 26px;
+      background: linear-gradient(145deg, #007AFF 0%, #5856D6 52%, #1d1d1f 100%);
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      box-shadow:
+        0 24px 50px rgba(0, 122, 255, 0.28),
+        inset 0 1px 2px rgba(255, 255, 255, 0.65);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 18px;
+      color: #ffffff;
+      overflow: hidden;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
+    }
+
+    .booster-pack-3d:hover {
+      transform: translateY(-7px) scale(1.03);
+      box-shadow: 0 30px 60px rgba(88, 86, 214, 0.38);
+    }
+
+    .booster-pack-3d.shaking {
+      animation: packShakeIntense 0.9s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes packShakeIntense {
+      0% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.08) translate(-10px, 4px) rotate(-6deg); filter: brightness(1.3); }
+      50% { transform: scale(1.14) translate(10px, -4px) rotate(6deg); filter: brightness(1.7); }
+      75% { transform: scale(1.22) translate(-8px, 4px) rotate(-8deg); filter: brightness(2.2); }
+      100% { transform: scale(1.65); filter: brightness(3.5); opacity: 0; }
+    }
+
+    .booster-art-circle {
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.18);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 46px;
+    }
+
+    .booster-cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-open-booster {
+      padding: 14px 30px;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 12px 28px rgba(0, 122, 255, 0.3);
+      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease;
+    }
+
+    .btn-open-booster:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(0, 122, 255, 0.4);
+    }
+
+    .btn-open-booster:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .booster-cost-pill {
+      background: rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .btn-secondary-action {
+      padding: 13px 22px;
+      font-size: 13.5px;
+      font-weight: 700;
+      border-radius: 999px;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      background: #ffffff;
+      color: #1c1c1e;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-secondary-action:hover {
+      transform: translateY(-1px);
+    }
+
+    .burst-particles-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 25;
+    }
+
+    .burst-particle {
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: particleExplode 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes particleExplode {
+      0% { transform: translate(-50%, -50%) scale(1.4); opacity: 1; }
+      100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0); opacity: 0; }
+    }
+
+    .drawn-cards-wrapper {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      width: 100%;
+    }
+
+    .drawn-cards-wrapper.visible {
+      display: flex;
+    }
+
+    .drawn-cards-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    /* Flip 3D */
+    .flip-slot {
+      width: var(--card-w);
+      height: var(--card-h);
+      perspective: 1100px;
+    }
+
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .flip-slot.is-flipped .flip-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-back,
+    .flip-front {
+      position: absolute;
+      inset: 0;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 16px;
+    }
+
+    .flip-back {
+      cursor: pointer;
+      background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+      border: 2px solid rgba(255, 255, 255, 0.45);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.18);
+    }
+
+    .flip-back.tease-RARE { border-color: #38bdf8; box-shadow: 0 0 22px rgba(56, 189, 248, 0.45); }
+    .flip-back.tease-HOLO { border-color: #e879f9; box-shadow: 0 0 28px rgba(232, 121, 249, 0.65); }
+    .flip-back.tease-SECRET { border-color: #fbbf24; box-shadow: 0 0 38px rgba(251, 191, 36, 0.9); }
+
+    .back-pokeball-ring {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+    }
+
+    .flip-front {
+      transform: rotateY(180deg);
+    }
+
+    /* ==========================================================================
+       COMPOSANT DE CARTE POKÉMON FULL-ART (STYLE ÉCARLATE & VIOLET IR / SIR EX)
+       Inspiré de Oratoria, Silvallié, Mimantis, Flambusard & Terapagos ex
+       ========================================================================== */
+    .tcg-card-3d-wrap {
+      width: var(--card-w);
+      height: var(--card-h);
+      perspective: 1050px;
+      position: relative;
+    }
+
+    .tcg-card {
+      --rx: 0deg;
+      --ry: 0deg;
+      --px: 50%;
+      --py: 50%;
+      --par-x: 0px;
+      --par-y: 0px;
+
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      transform-style: preserve-3d;
+      transform: rotateX(var(--rx)) rotateY(var(--ry));
+      transition: transform 0.14s ease-out, box-shadow 0.2s ease;
+      overflow: hidden;
+      cursor: grab;
+      /* Bordure métallique argentée Pokémon Écarlate & Violet */
+      background: linear-gradient(135deg, #cbd5e1 0%, #f8fafc 25%, #94a3b8 50%, #f1f5f9 75%, #cbd5e1 100%);
+      box-shadow:
+        0 16px 34px rgba(15, 23, 42, 0.32),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+    }
+
+    .tcg-card.is-interacting {
+      transition: none;
+    }
+
+    /* Bordures selon la rareté (Argent -> Argent Brillant -> Prisme -> Cristal Arc-en-Ciel Terapagos ex) */
+    .tcg-card[data-rarity="COMMON"] {
+      background: linear-gradient(135deg, #cbd5e1 0%, #e2e8f0 35%, #94a3b8 70%, #cbd5e1 100%);
+    }
+
+    .tcg-card[data-rarity="RARE"] {
+      background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 28%, #7dd3fc 55%, #f0f9ff 80%, #bae6fd 100%);
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.35), 0 0 20px rgba(56, 189, 248, 0.35);
+    }
+
+    .tcg-card[data-rarity="HOLO"] {
+      background: linear-gradient(135deg, #c084fc 0%, #f5d0fe 22%, #38bdf8 48%, #f472b6 74%, #e879f9 100%);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.42), 0 0 26px rgba(217, 70, 239, 0.45);
+    }
+
+    /* Bordure Cristal Arc-en-ciel facettée style Terapagos ex */
+    .tcg-card[data-rarity="SECRET"] {
+      background:
+        repeating-conic-gradient(
+          from 0deg at 50% 50%,
+          rgba(255, 255, 255, 0.28) 0deg 12deg,
+          transparent 12deg 24deg
+        ),
+        linear-gradient(135deg, #22d3ee 0%, #4ade80 18%, #facc15 36%, #fb7185 56%, #c084fc 78%, #38bdf8 100%);
+      box-shadow: 0 20px 44px rgba(15, 23, 42, 0.48), 0 0 34px rgba(250, 204, 21, 0.65);
+    }
+
+    /* Toile Full-Art intérieure (100% illustration du haut en bas) */
+    .pkmn-fullart-canvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 9px;
+      overflow: hidden;
+      background: #1e293b;
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.28);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Image Full-Bleed avec parallaxe et respiration douce */
+    .card-art-img-holder {
+      position: absolute;
+      inset: -12px;
+      z-index: 1;
+      transform: translate3d(var(--par-x), var(--par-y), 0);
+      pointer-events: none;
+    }
+
+    .card-art-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      animation: animeBreathe 6s ease-in-out infinite alternate;
+      display: block;
+      filter: saturate(1.12) contrast(1.04);
+    }
+
+    @keyframes animeBreathe {
+      0% { transform: scale(1.02); }
+      100% { transform: scale(1.08); }
+    }
+
+    /* Voile ultra-transparent (sans fond gris/blanc laiteux en bas de la carte) */
+    .pkmn-readability-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.14) 0%,
+        rgba(255, 255, 255, 0.0) 16%,
+        rgba(255, 255, 255, 0.0) 68%,
+        rgba(255, 255, 255, 0.16) 100%
+      );
+    }
+
+    .art-ambient-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .art-ember {
+      position: absolute;
+      bottom: -8px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff 0%, var(--neon-cyan) 60%, transparent 100%);
+      animation: floatEmber 3.6s ease-in infinite;
+    }
+
+    @keyframes floatEmber {
+      0% { transform: translateY(0) scale(0.7); opacity: 0; }
+      30% { opacity: 0.9; }
+      100% { transform: translateY(-220px) translateX(14px) scale(1.25); opacity: 0; }
+    }
+
+    /* Structure superposée (En-tête, Talent/Attaques, Pied de carte) */
+    .card-inner-frame {
+      position: relative;
+      z-index: 7;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+      padding: 6px 7px 5px;
+      pointer-events: none;
+    }
+
+    /* 1. EN-TÊTE POKÉMON (BASE / NIVEAU 2 + Médaillon + Nom + PV + Orbe Énergie) */
+    .pkmn-top-section {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .pkmn-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 4px;
+      position: relative;
+    }
+
+    .pkmn-left-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    /* Colonne gauche : Pilule NIVEAU + Médaillon rond d'évolution */
+    .pkmn-stage-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .pkmn-stage-pill {
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+      border: 1px solid #64748b;
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: 7.5px;
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: 0.3px;
+      color: #0f172a;
+      transform: skewX(-10deg);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+      white-space: nowrap;
+    }
+
+    .pkmn-evo-portrait {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      margin-top: -2px;
+      border: 2px solid #e2e8f0;
+      background: radial-gradient(circle, #ffffff 0%, #94a3b8 100%);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35), inset 0 1px 2px #ffffff;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .pkmn-evo-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .pkmn-title-group {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      flex: 1;
+      padding-top: 1px;
+    }
+
+    .pkmn-name-line {
+      display: flex;
+      align-items: baseline;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .card-char-name {
+      font-size: 14.5px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow:
+        -1.5px -1.5px 0 #ffffff,
+         1.5px -1.5px 0 #ffffff,
+        -1.5px  1.5px 0 #ffffff,
+         1.5px  1.5px 0 #ffffff,
+         0px    2px   5px rgba(255, 255, 255, 0.95);
+    }
+
+    /* Logo "ex" métallique style Terapagos ex */
+    .pkmn-ex-badge {
+      font-size: 13px;
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: -0.5px;
+      padding: 0 3px;
+      background: linear-gradient(180deg, #ffffff 0%, #fde047 45%, #f97316 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      filter: drop-shadow(0 1px 0 #0f172a) drop-shadow(-1px 0 0 #0f172a) drop-shadow(0 -1px 0 #0f172a) drop-shadow(1px 1px 1px rgba(0,0,0,0.85));
+      flex-shrink: 0;
+    }
+
+    /* Barre argentée fine "Évolution de / Origine : Anime" sous le nom */
+    .pkmn-origin-bar {
+      display: inline-block;
+      font-size: 7.5px;
+      font-weight: 700;
+      color: #1e293b;
+      background: linear-gradient(90deg, rgba(241, 245, 249, 0.92) 0%, rgba(226, 232, 240, 0.78) 85%, transparent 100%);
+      border-top: 1px solid rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid rgba(100, 116, 139, 0.55);
+      padding: 1px 8px 1px 4px;
+      margin-top: 1px;
+      border-radius: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 125px;
+    }
+
+    /* Bloc PV + Sphère d'Énergie à droite */
+    .pkmn-hp-cluster {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .pkmn-pv-label {
+      font-size: 8.5px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-top: 4px;
+      text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    }
+
+    .pkmn-pv-value {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: #0f172a;
+      text-shadow:
+        -1.5px -1.5px 0 #ffffff,
+         1.5px -1.5px 0 #ffffff,
+        -1.5px  1.5px 0 #ffffff,
+         1.5px  1.5px 0 #ffffff;
+    }
+
+    .pkmn-energy-sphere {
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35), inset 0 2px 3px rgba(255, 255, 255, 0.65);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    /* Ruban Téracristal (pour les cartes HOLO et SECRET ex) */
+    .pkmn-teracristal-banner {
+      align-self: flex-end;
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.92), rgba(168, 85, 247, 0.92), rgba(244, 114, 182, 0.92));
+      border: 1px solid #ffffff;
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-size: 7.5px;
+      font-weight: 900;
+      font-style: italic;
+      color: #ffffff;
+      letter-spacing: 0.4px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 2px 6px rgba(56, 189, 248, 0.35);
+    }
+
+    /* 2. ZONE CENTRALE / BASSE : TALENT ROUGE & ATTAQUES EN SUPERPOSITION */
+    .pkmn-Play-zone {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px 2px 3px;
+    }
+
+    /* Bloc Talent (Pilule rouge biseautée + Nom rouge détouré blanc) */
+    .pkmn-talent-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+    }
+
+    .pkmn-talent-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pkmn-talent-pill {
+      background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+      color: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 999px;
+      padding: 1px 8px;
+      font-size: 8.5px;
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transform: skewX(-10deg);
+      flex-shrink: 0;
+    }
+
+    .pkmn-talent-name {
+      font-size: 11.5px;
+      font-weight: 900;
+      color: #b91c1c;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow:
+        -1.2px -1.2px 0 #ffffff,
+         1.2px -1.2px 0 #ffffff,
+        -1.2px  1.2px 0 #ffffff,
+         1.2px  1.2px 0 #ffffff,
+         0px    1px   4px #ffffff;
+    }
+
+    .pkmn-outlined-desc {
+      font-size: 8.4px;
+      font-weight: 700;
+      line-height: 1.22;
+      color: #0f172a;
+      text-shadow:
+        -1px -1px 0 rgba(255, 255, 255, 0.98),
+         1px -1px 0 rgba(255, 255, 255, 0.98),
+        -1px  1px 0 rgba(255, 255, 255, 0.98),
+         1px  1px 0 rgba(255, 255, 255, 0.98),
+         0px  0px 4px #ffffff;
+      max-height: 2.45em;
+      overflow: hidden;
+    }
+
+    /* Bloc Attaque (Orbes de coût + Nom d'attaque + Dégâts à droite) */
+    .pkmn-attack-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+      padding-top: 2px;
+    }
+
+    .pkmn-attack-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+    }
+
+    .pkmn-cost-orbs {
+      display: flex;
+      align-items: center;
+      gap: 2.5px;
+      flex-shrink: 0;
+    }
+
+    .pkmn-mini-orb {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 1px solid #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.7);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8.5px;
+    }
+
+    .pkmn-attack-title {
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #0f172a;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow:
+        -1.3px -1.3px 0 #ffffff,
+         1.3px -1.3px 0 #ffffff,
+        -1.3px  1.3px 0 #ffffff,
+         1.3px  1.3px 0 #ffffff,
+         0px    1px   4px #ffffff;
+    }
+
+    .pkmn-attack-dmg {
+      font-size: 15px;
+      font-weight: 900;
+      color: #0f172a;
+      flex-shrink: 0;
+      text-shadow:
+        -1.3px -1.3px 0 #ffffff,
+         1.3px -1.3px 0 #ffffff,
+        -1.3px  1.3px 0 #ffffff,
+         1.3px  1.3px 0 #ffffff;
+    }
+
+    /* 3. PIED DE CARTE : BARRE FAIBLESSE / RÉSISTANCE / RETRAITE + INFOS COLLECTOR */
+    .pkmn-bottom-section {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding-top: 2px;
+    }
+
+    .pkmn-stat-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(203, 213, 225, 0.94) 100%);
+      border-top: 1px solid #ffffff;
+      border-bottom: 1px solid #64748b;
+      border-radius: 4px;
+      padding: 1.5px 6px;
+      font-size: 7.2px;
+      font-weight: 800;
+      color: #1e293b;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .pkmn-stat-cell {
+      display: inline-flex;
+      align-items: center;
+      gap: 2.5px;
+    }
+
+    .pkmn-footer-meta {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 4px;
+    }
+
+    .pkmn-collector-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+      flex-shrink: 0;
+    }
+
+    .pkmn-illus-line {
+      font-size: 6.8px;
+      font-weight: 800;
+      font-style: italic;
+      color: #0f172a;
+      text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    }
+
+    .pkmn-set-codes {
+      display: flex;
+      align-items: center;
+      gap: 2.5px;
+    }
+
+    .pkmn-reg-box {
+      background: #ffffff;
+      color: #0f172a;
+      border: 1px solid #0f172a;
+      border-radius: 2px;
+      padding: 0 2.5px;
+      font-size: 6.8px;
+      font-weight: 900;
+    }
+
+    .pkmn-set-box {
+      background: #0f172a;
+      color: #ffffff;
+      border-radius: 2px;
+      padding: 0.5px 3.5px;
+      font-size: 6.5px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+    }
+
+    .pkmn-serial-text {
+      font-size: 7.5px;
+      font-weight: 900;
+      color: #0f172a;
+      text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    }
+
+    .pkmn-rarity-star {
+      color: #f59e0b;
+      font-size: 8.5px;
+      filter: drop-shadow(0 0 1px #000);
+    }
+
+    /* Encadré "Règle des Pokémon-ex" ou texte de lore en bas à droite */
+    .pkmn-ex-rule-box {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(241, 245, 249, 0.95) 0%, rgba(203, 213, 225, 0.95) 100%);
+      border: 1px solid #64748b;
+      border-radius: 5px;
+      padding: 2px 5px;
+      font-size: 6.3px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #0f172a;
+      box-shadow: inset 0 1px 0 #ffffff;
+    }
+
+    .pkmn-ex-rule-title {
+      display: inline-block;
+      background: #0f172a;
+      color: #fde047;
+      font-size: 6px;
+      font-weight: 900;
+      font-style: italic;
+      padding: 0 4px;
+      border-radius: 2px;
+      margin-right: 3px;
+    }
+
+    .pkmn-lore-text {
+      flex: 1;
+      text-align: right;
+      font-size: 6.6px;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1.15;
+      color: #0f172a;
+      text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+      max-height: 2.3em;
+      overflow: hidden;
+    }
+
+    .dupe-count-badge {
+      background: linear-gradient(135deg, #007AFF, #5856D6);
+      color: #ffffff;
+      font-size: 7.5px;
+      font-weight: 900;
+      padding: 1px 5px;
+      border-radius: 99px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Couches Holo & Paillettes (Rayons diagonaux iridescents style Terapagos ex / Silvallié) */
+    .silver-glare-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4;
+      opacity: 0;
+      mix-blend-mode: screen;
+      background: radial-gradient(circle at var(--px) var(--py), rgba(255, 255, 255, 0.58) 0%, transparent 68%);
+      transition: opacity 0.25s ease;
+    }
+    .tcg-card[data-rarity="RARE"]:hover .silver-glare-layer { opacity: 1; }
+
+    .holo-foil-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      opacity: 0;
+      mix-blend-mode: color-dodge;
+      background-image:
+        repeating-linear-gradient(
+          118deg,
+          rgba(255, 0, 128, 0.38) 0%,
+          rgba(255, 204, 0, 0.38) 6%,
+          rgba(0, 255, 180, 0.38) 12%,
+          rgba(0, 195, 255, 0.38) 18%,
+          rgba(170, 0, 255, 0.38) 24%,
+          rgba(255, 0, 128, 0.38) 30%
+        ),
+        radial-gradient(farthest-corner circle at var(--px) var(--py), rgba(255, 255, 255, 0.72) 0%, transparent 78%);
+      background-size: 250% 250%, 160% 160%;
+      background-position: var(--px) var(--py), center;
+      transition: opacity 0.25s ease;
+    }
+    .tcg-card[data-rarity="HOLO"] .holo-foil-layer { opacity: 0.24; }
+    .tcg-card[data-rarity="HOLO"]:hover .holo-foil-layer { opacity: 0.82; }
+    .tcg-card[data-rarity="SECRET"] .holo-foil-layer { opacity: 0.38; }
+    .tcg-card[data-rarity="SECRET"]:hover .holo-foil-layer { opacity: 0.92; }
+
+    .secret-sparkles-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 6;
+      display: none;
+    }
+    .tcg-card[data-rarity="SECRET"] .secret-sparkles-layer { display: block; }
+
+    .sparkle-star {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      background: radial-gradient(circle, #ffffff 0%, #fde047 45%, transparent 72%);
+      clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
+      animation: twinkleStar 2.1s ease-in-out infinite;
+    }
+
+    @keyframes twinkleStar {
+      0%, 100% { transform: scale(0.2) rotate(0deg); opacity: 0.15; }
+      50% { transform: scale(1.25) rotate(45deg); opacity: 1; }
+    }
+
+    /* Collection (Galerie Pure Sans Boîtes Grises) */
+    .collection-section {
+      background: transparent;
+      border: none;
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .collection-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #eef0f4;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .collection-header {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .collection-controls-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .studio-sort-select {
+      padding: 8px 12px;
+      border-radius: 9px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      color: #1f2937;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .studio-sort-select {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: #f8fafc;
+    }
+
+    .filter-bar {
+      display: inline-flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      background: #f3f4f6;
+      padding: 4px;
+      border-radius: 10px;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .filter-bar {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .filter-btn {
+      padding: 7px 14px;
+      border-radius: 7px;
+      border: none;
+      background: transparent;
+      color: #4b5563;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .filter-btn {
+      color: #94a3b8;
+    }
+
+    .filter-btn.active {
+      background: #ffffff;
+      color: #4f46e5;
+      font-weight: 700;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+    }
+
+    .tcg-drawer-overlay[data-studio-theme="obsidian"] .filter-btn.active {
+      background: #4f46e5;
+      color: #ffffff;
+    }
+
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(236px, 1fr));
+      gap: 28px 22px;
+      justify-items: center;
+    }
+
+    .collection-grid.compact-binder {
+      grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+      gap: 18px 14px;
+    }
+
+    .collection-grid.compact-binder .tcg-card-3d-wrap {
+      transform: scale(0.86);
+      transform-origin: top center;
+      margin-bottom: -44px;
+    }
+
+    .collection-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 56px 20px;
+      color: #6b7280;
+      font-weight: 600;
+    }
+
+    /* Carte posée directement sans boîte grise autour */
+    .collection-item-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+
+    .collection-item-wrapper.unowned-lexicon .tcg-card {
+      filter: grayscale(0.85) opacity(0.55);
+      transition: filter 0.25s ease, transform 0.14s ease-out;
+    }
+
+    .collection-item-wrapper.unowned-lexicon:hover .tcg-card {
+      filter: grayscale(0.2) opacity(0.9);
+    }
+
+    .sell-single-btn {
+      padding: 5px 13px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 999px;
+      border: 1px solid rgba(245, 158, 11, 0.38);
+      background: linear-gradient(180deg, #fffbeb 0%, #fef3c7 100%);
+      color: #b45309;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(245, 158, 11, 0.15);
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+    .sell-single-btn:hover {
+      background: #fde68a;
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       MODAL ADMIN / GOD MODE (STYLE iOS 18 CONTROL CENTER & SETTINGS SHEET)
+       ========================================================================== */
+    .admin-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.35);
+      -webkit-backdrop-filter: blur(22px) saturate(160%);
+      backdrop-filter: blur(22px) saturate(160%);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .admin-modal-backdrop.open { display: flex; }
+
+    .admin-dashboard {
+      width: 100%;
+      max-width: 1040px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: rgba(242, 242, 247, 0.92);
+      -webkit-backdrop-filter: blur(50px) saturate(200%);
+      backdrop-filter: blur(50px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      border-radius: 36px;
+      padding: 16px 28px 28px;
+      color: #1c1c1e;
+      box-shadow:
+        0 32px 80px rgba(15, 23, 42, 0.26),
+        inset 0 1px 0 #ffffff;
+      animation: iosSheetSpring 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes iosSheetSpring {
+      0% { opacity: 0; transform: scale(0.94) translateY(24px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .ios-sheet-grabber {
+      width: 42px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(60, 60, 67, 0.24);
+      margin: 0 auto 14px;
+    }
+
+    .admin-top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(60, 60, 67, 0.1);
+    }
+
+    .admin-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .admin-close-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(118, 118, 128, 0.16);
+      color: #3a3a3c;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .admin-close-btn:hover {
+      background: rgba(118, 118, 128, 0.26);
+      transform: scale(1.06);
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    .admin-card {
+      background: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 6px 22px rgba(15, 23, 42, 0.04);
+    }
+
+    .admin-card h3 {
+      font-size: 14.5px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: #1c1c1e;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .admin-btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    .adm-btn {
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: none;
+      background: rgba(118, 118, 128, 0.12);
+      color: #1c1c1e;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .adm-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(118, 118, 128, 0.2);
+    }
+
+    .adm-btn.gold {
+      background: linear-gradient(135deg, #FF9500 0%, #FFCC00 100%);
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 16px rgba(255, 149, 0, 0.26);
+    }
+
+    .adm-btn.purple {
+      background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 16px rgba(0, 122, 255, 0.25);
+    }
+
+    .adm-btn.danger {
+      background: rgba(255, 59, 48, 0.12);
+      color: #FF3B30;
+    }
+    .adm-btn.danger:hover {
+      background: #FF3B30;
+      color: #ffffff;
+    }
+
+    .adm-btn.active-toggle {
+      background: #34C759;
+      color: #ffffff;
+      box-shadow: 0 6px 16px rgba(52, 199, 89, 0.32);
+    }
+
+    .adm-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #3a3a3c;
+    }
+
+    .adm-input, .adm-select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(60, 60, 67, 0.12);
+      background: rgba(118, 118, 128, 0.08);
+      color: #1c1c1e;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .adm-input:focus, .adm-select:focus {
+      background: #ffffff;
+      border-color: #007AFF;
+      box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+    }
+
+    .adm-slider-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 12px;
+      background: rgba(118, 118, 128, 0.06);
+      padding: 8px 12px;
+      border-radius: 12px;
+    }
+
+    .adm-slider-row input[type="range"] {
+      width: 100%;
+      accent-color: #007AFF;
+      cursor: pointer;
+    }
+
+    .toast-stack {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 999;
+      pointer-events: none;
+    }
+
+    .toast-msg {
+      background: rgba(28, 28, 30, 0.88);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      backdrop-filter: blur(24px) saturate(180%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.28);
+      animation: iosIslandPop 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes iosIslandPop {
+      0% { opacity: 0; transform: translateY(-12px) scale(0.9); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 980px) {
+      .hero-giant-title { font-size: 2.8rem; margin-left: 0; }
+      .hero-left-Copy { margin-left: 0; }
+      .nav-links, .hero-ios-widgets { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nuages subtils dans le dégradé bleu ciel -->
+  <div class="sky-clouds"></div>
+
+  <!-- ======================= 2. BARRE DE NAVIGATION iOS 18 LIQUID GLASS ======================= -->
+  <nav class="revolut-navbar">
+    <div class="nav-left">
+      <a class="nav-logo" id="nav-logo-btn">
+        <span class="nav-logo-icon">✦</span>
+        <span>Aether</span>
+      </a>
+      <ul class="nav-links">
+        <li><a data-open-drawer="boosters">Personal</a></li>
+        <li><a data-open-drawer="collection">Collection</a></li>
+        <li><a data-open-drawer="boosters">Boosters</a></li>
+        <li><a id="nav-admin-link">🎛️ Control Center</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="nav-wallet-pill" id="nav-wallet-pill" title="Ouvrir le Control Center Admin">
+        <span>🪙</span>
+        <span id="nav-coins-val">¥ 12,024</span>
+      </div>
+      <button class="btn-login" id="nav-login-btn">Log in</button>
+      <button class="btn-signup" id="nav-signup-btn">Sign up</button>
+    </div>
+  </nav>
+
+  <!-- ======================= 3 & 4. ÉCRAN HERO REVOLUT & CADRE CENTRAL EN VERRE ======================= -->
+  <section class="hero-stage">
+    <!-- Titre géant en blanc (4.5rem) en arrière-plan du cadre -->
+    <h1 class="hero-giant-title">
+      Change the way you<br />collect anime
+    </h1>
+
+    <!-- Paragraphe de 3 lignes + boutons pilules iOS 18 -->
+    <div class="hero-left-Copy">
+      <div class="ios-live-badge">
+        <span class="ios-live-dot"></span>
+        <span>iOS 18 Liquid Glass • 60 Cartes 3D</span>
+      </div>
+      <p class="hero-description">
+        Ici ou ailleurs, en local ou en global — collectionnez, échangez et invoquez vos cartes holographiques 3D librement, en un clic.
+      </p>
+      <div class="hero-cta-group">
+        <button class="btn-explore-pill" id="btn-hero-explore">
+          Explorer la collection
+        </button>
+        <button class="btn-ios-glass-pill" id="btn-hero-admin">
+          🎛️ Admin
+        </button>
+      </div>
+    </div>
+
+    <!-- Sujet central (sans cadre rectangulaire blanc) -->
+    <div class="hero-centerpiece">
+      <!-- Personnage Anime HD détouré -->
+      <div class="hero-character-cutout">
+        <img
+          id="hero-cutout-img"
+          src="hero-cutout.png"
+          alt="Featured Anime Hero"
+        />
+      </div>
+    </div>
+
+    <!-- Widgets spatiaux iOS 18 à droite de l'écran d'accueil -->
+    <div class="hero-ios-widgets">
+      <div class="ios-spatial-card" id="ios-widget-collection" title="Ouvrir la collection">
+        <div class="ios-card-top">
+          <span class="ios-squircle-icon ios-squircle-blue">🃏</span>
+          <span class="ios-card-tag">Apple Arcade TCG</span>
+        </div>
+        <div class="ios-card-title">Progression Collection</div>
+        <div class="ios-card-big" id="hero-unique-stat">0 / 60 Cartes</div>
+        <div class="ios-progress-track">
+          <div class="ios-progress-fill" id="hero-progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="ios-spatial-card" id="ios-widget-admin" title="Ouvrir le Control Center Admin">
+        <div class="ios-card-top">
+          <span class="ios-squircle-icon ios-squircle-purple">🎛️</span>
+          <span class="ios-card-tag" id="hero-passive-stat">+¥ 3/s</span>
+        </div>
+        <div class="ios-card-title">Control Center • God Mode</div>
+        <div class="ios-card-big" id="hero-secret-rate">Secret Rare : 2%</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= STUDIO TCG : SIDEBAR GAUCHE (STYLE SLMOBBIN) + ESPACE COLLECTION ======================= -->
+  <div class="tcg-drawer-overlay" id="tcg-drawer" data-studio-theme="light">
+    <!-- BARRE LATÉRALE GAUCHE INSPIRÉE DE SLMOBBIN -->
+    <aside class="sl-sidebar" id="sl-sidebar">
+      <div class="sl-sidebar-top">
+        <!-- 1. En-tête Workspace (SLMobbin / All Project Data) -->
+        <div class="sl-brand-header" id="sl-brand-switcher" title="Basculer le thème Clair / Obsidian Holo">
+          <div class="sl-brand-left">
+            <div class="sl-brand-logo">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4c5 0 8 3 8 8 0-5 3-8 8-8"/>
+                <path d="M4 20c5 0 8-3 8-8 0 5 3 8 8 8"/>
+              </svg>
+            </div>
+            <div class="sl-brand-titles">
+              <span class="sl-brand-name">AetherVault</span>
+              <span class="sl-brand-sub">All Collection Data</span>
+            </div>
+          </div>
+          <span class="sl-chevron">⌄</span>
+        </div>
+
+        <!-- 2. Bouton Violet Principal (+ Create New -> + Ouvrir un Booster) -->
+        <button class="sl-btn-create" id="sl-btn-create-booster">
+          <span class="sl-btn-create-left">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Ouvrir un Booster</span>
+          </span>
+          <span style="opacity:0.85;font-size:11px;">⌄</span>
+        </button>
+
+        <!-- 3. Recherche rapide (Search ⌘ + K) -->
+        <div class="sl-search-row">
+          <span class="sl-nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input type="text" class="sl-search-input" id="sl-sidebar-search" placeholder="Search" autocomplete="off" />
+          <span class="sl-kbd-shortcut">⌘ + K</span>
+        </div>
+
+        <!-- 4. Menu Principal (Home, Data, Events/Users/Lexicon, Session Replay) -->
+        <nav class="sl-nav-group">
+          <button class="sl-nav-item" id="sl-nav-home">
+            <span class="sl-nav-left">
+              <span class="sl-nav-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              </span>
+              <span>Home</span>
+            </span>
+          </button>
+
+          <button class="sl-nav-item active" id="sl-nav-data-toggle">
+            <span class="sl-nav-left">
+              <span class="sl-nav-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                </svg>
+              </span>
+              <span>Data & Cartes</span>
+            </span>
+            <span class="sl-chevron" id="sl-data-chevron">⌄</span>
+          </button>
+
+          <!-- Sous-menu indenté comme Events / Users / Lexicon -->
+          <div class="sl-subnav-list" id="sl-data-sublist">
+            <button class="sl-subnav-item active" data-sl-filter="ALL">
+              <span>Toutes les cartes</span>
+              <span class="sl-count-badge" id="sl-badge-all">0</span>
+            </button>
+            <button class="sl-subnav-item" data-sl-filter="SECRET">
+              <span>Téracristal EX</span>
+              <span class="sl-count-badge" id="sl-badge-secret">0</span>
+            </button>
+            <button class="sl-subnav-item" data-sl-filter="HOLO">
+              <span>Illustration Holo</span>
+              <span class="sl-count-badge" id="sl-badge-holo">0</span>
+            </button>
+            <button class="sl-subnav-item" data-sl-filter="LEXICON">
+              <span>Lexicon (60 Héros)</span>
+              <span class="sl-count-badge">60</span>
+            </button>
+          </div>
+
+          <button class="sl-nav-item" id="sl-nav-replay">
+            <span class="sl-nav-left">
+              <span class="sl-nav-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  <polygon points="10 9 15 12 10 15 10 9"></polygon>
+                </svg>
+              </span>
+              <span>Booster Replay</span>
+            </span>
+          </button>
+        </nav>
+
+        <div class="sl-divider"></div>
+
+        <!-- 5. Section PINNED (⌄ PINNED -> 🌱 Starter Board) -->
+        <div class="sl-pinned-header">
+          <span>⌄</span>
+          <span>PINNED</span>
+        </div>
+
+        <nav class="sl-nav-group">
+          <button class="sl-nav-item" data-sl-filter="STARTER" id="sl-pin-starter">
+            <span class="sl-nav-left">
+              <span>🌱</span>
+              <span>Starter Board (Top PV)</span>
+            </span>
+          </button>
+          <button class="sl-nav-item" id="sl-pin-sell-dupes">
+            <span class="sl-nav-left">
+              <span>♻️</span>
+              <span>Vendre Doublons</span>
+            </span>
+            <span class="sl-count-badge" id="sl-badge-dupes">0</span>
+          </button>
+          <button class="sl-nav-item" id="sl-pin-admin">
+            <span class="sl-nav-left">
+              <span>🎛️</span>
+              <span>God Mode Admin</span>
+            </span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- 6. Bas de la Sidebar (Bouton Or "💎 Upgrade Plan / God Pack" + 4 icônes) -->
+      <div class="sl-sidebar-bottom">
+        <button class="sl-btn-upgrade" id="sl-btn-godpack" title="Ouvrir un God Pack 100% Téracristal EX">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3h12l4 6-10 12L2 9z"></path>
+            <path d="M2 9h20"></path>
+          </svg>
+          <span>God Pack • 100% EX</span>
+        </button>
+
+        <div class="sl-bottom-toolbar">
+          <div class="sl-toolbar-left">
+            <button class="sl-icon-btn" id="sl-tool-grid" title="Basculer l'affichage Grille Compacte / Standard">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="5" height="5"></rect>
+                <rect x="10" y="3" width="5" height="5"></rect>
+                <rect x="17" y="3" width="4" height="5"></rect>
+                <rect x="3" y="10" width="5" height="5"></rect>
+                <rect x="10" y="10" width="5" height="5"></rect>
+                <rect x="17" y="10" width="4" height="5"></rect>
+                <rect x="3" y="17" width="5" height="4"></rect>
+                <rect x="10" y="17" width="5" height="4"></rect>
+                <rect x="17" y="17" width="4" height="4"></rect>
+              </svg>
+            </button>
+
+            <button class="sl-icon-btn" id="sl-tool-help" title="Afficher les probabilités de drop">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+              <span class="sl-notif-dot"></span>
+            </button>
+
+            <button class="sl-icon-btn" id="sl-tool-settings" title="Paramètres & Control Center Admin">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+            </button>
+          </div>
+
+          <button class="sl-icon-btn" id="sl-tool-collapse" title="Réduire la barre latérale">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="4" x2="4" y2="20"></line>
+              <polyline points="14 8 10 12 14 16"></polyline>
+              <line x1="10" y1="12" x2="20" y2="12"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ESPACE DE TRAVAIL PRINCIPAL À DROITE -->
+    <div class="studio-workspace-main" id="studio-workspace-main">
+      <header class="drawer-topbar">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button class="btn-back-hero" id="btn-expand-sidebar" style="display:none;" title="Afficher le menu latéral">
+            ☰ Menu
+          </button>
+          <button class="btn-back-hero" id="btn-close-drawer">
+            ‹ Accueil
+          </button>
+          <div class="studio-breadcrumb">
+            <span>AetherVault</span>
+            <span>/</span>
+            <strong id="studio-breadcrumb-current">Toutes les cartes</strong>
+          </div>
+          <span style="font-size:11.5px;font-weight:700;color:#16a34a;background:rgba(22,163,74,0.1);padding:5px 10px;border-radius:999px;" id="api-status-badge">🟢 API Jikan & AniList Live</span>
+        </div>
+
+        <div class="hud-stats">
+          <button class="btn-back-hero" id="btn-toggle-studio-theme" title="Basculer entre fond Perle Lumineux et fond Obsidian Holo">
+            🌙 Mode Obsidian
+          </button>
+
+          <div class="hud-pill">
+            <span>🃏</span>
+            <div>
+              <span class="hud-label">Cartes Uniques</span>
+              <span class="hud-value" id="hud-unique-count">0 / 60</span>
+            </div>
+          </div>
+
+          <div class="hud-pill">
+            <span>📦</span>
+            <div>
+              <span class="hud-label">Total Cartes</span>
+              <span class="hud-value" id="hud-total-cards">0</span>
+            </div>
+          </div>
+
+          <div class="hud-pill">
+            <span>🪙</span>
+            <div>
+              <span class="hud-label">Solde Yen</span>
+              <span class="hud-value coins-value" id="hud-coins">¥ 12,024</span>
+              <span class="passive-rate" id="hud-passive-rate">+3/s</span>
+            </div>
+          </div>
+
+          <button class="btn-sell-dupes" id="btn-sell-all-dupes" disabled>
+            ♻️ Vendre doublons (+¥ 0)
+          </button>
+
+          <button class="btn-admin-toggle" id="btn-open-admin">
+            🎛️ Control Center
+          </button>
+        </div>
+      </header>
+
+      <main class="main-wrapper">
+        <!-- ZONE GACHA & BOOSTER -->
+        <section class="gacha-arena" id="section-boosters">
+          <div class="arena-flash" id="arena-flash"></div>
+          <div class="burst-particles-layer" id="burst-particles-layer"></div>
+
+          <div class="gacha-top-bar">
+            <div>
+              <h2 style="font-size:19px;font-weight:800;letter-spacing:-0.02em;">Studio d'Ouverture • Boosters Holographiques</h2>
+              <p style="font-size:12.5px;font-weight:500;color:#6b7280;">Chaque booster contient 5 cartes Full-Art inclinables en 3D avec reflet holographique.</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <div class="odds-pills">
+                <span class="odd-badge odd-common" id="pill-odd-common">★ Commun : 70%</span>
+                <span class="odd-badge odd-rare" id="pill-odd-rare">★★ Rare : 20%</span>
+                <span class="odd-badge odd-holo" id="pill-odd-holo">★★★ Holo : 8%</span>
+                <span class="odd-badge odd-secret" id="pill-odd-secret">★★★★ Secret Rare : 2%</span>
+              </div>
+              <button class="btn-back-hero" id="btn-toggle-booster-stage" title="Plier / Déplier le studio d'ouverture">
+                Masquer Studio ▴
+              </button>
+            </div>
+          </div>
+
+          <div class="booster-stage">
+            <div class="booster-pack-container" id="booster-closed-view">
+              <div class="booster-pack-3d" id="booster-pack-el">
+                <span style="font-size:11px;font-weight:700;letter-spacing:1px;">ÉDITION AETHER</span>
+                <div class="booster-art-circle">✦</div>
+                <div style="text-align:center;">
+                  <h3 style="font-size:17px;font-weight:800;">ANIME LEGENDS</h3>
+                  <span style="font-size:11px;opacity:0.85;">5 CARTES HOLO 3D</span>
+                </div>
+              </div>
+
+              <div class="booster-cta-row">
+                <button class="btn-open-booster" id="btn-open-booster">
+                  <span>OUVRIR UN BOOSTER</span>
+                  <span class="booster-cost-pill">¥ 100</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="drawn-cards-wrapper" id="drawn-cards-view">
+              <div class="drawn-cards-row" id="drawn-cards-row"></div>
+              <div class="booster-cta-row">
+                <button class="btn-secondary-action" id="btn-reveal-all">👁️ Tout retourner</button>
+                <button class="btn-open-booster" id="btn-open-another">
+                  <span>OUVRIR UN AUTRE BOOSTER</span>
+                  <span class="booster-cost-pill">¥ 100</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- GALERIE DE COLLECTION -->
+        <section class="collection-section" id="section-collection">
+          <div class="collection-header">
+            <div>
+              <h2 style="font-size:20px;font-weight:800;letter-spacing:-0.02em;" id="collection-section-title">Ma Collection Holographique</h2>
+              <p style="font-size:12.5px;font-weight:500;color:#6b7280;" id="collection-section-subtitle">Survolez vos cartes avec la souris pour admirer l'inclinaison 3D et le film holographique sans aucun fond gris.</p>
+            </div>
+
+            <div class="collection-controls-right">
+              <select class="studio-sort-select" id="studio-sort-select" title="Trier les cartes">
+                <option value="RARITY">Trier : Rareté ★</option>
+                <option value="HP">Trier : PV / Puissance</option>
+                <option value="DUPES">Trier : Quantité</option>
+                <option value="NAME">Trier : Nom (A–Z)</option>
+              </select>
+
+              <div class="filter-bar" id="collection-filters">
+                <button class="filter-btn active" data-filter="ALL">Toutes (<span id="count-all">0</span>)</button>
+                <button class="filter-btn" data-filter="SECRET">★★★★ EX (<span id="count-secret">0</span>)</button>
+                <button class="filter-btn" data-filter="HOLO">★★★ Holo (<span id="count-holo">0</span>)</button>
+                <button class="filter-btn" data-filter="RARE">★★ Rare (<span id="count-rare">0</span>)</button>
+                <button class="filter-btn" data-filter="COMMON">★ Commun (<span id="count-common">0</span>)</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="collection-grid" id="collection-grid"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- ======================= MODAL DASHBOARD ADMIN (STYLE iOS 18 CONTROL CENTER) ======================= -->
+  <div class="admin-modal-backdrop" id="admin-modal">
+    <div class="admin-dashboard">
+      <div class="ios-sheet-grabber"></div>
+      <div class="admin-top-header">
+        <div class="admin-header-left">
+          <span class="ios-squircle-icon ios-squircle-purple" style="width:42px;height:42px;border-radius:12px;font-size:20px;">🎛️</span>
+          <div>
+            <h2 style="font-size:20px;font-weight:800;color:#1c1c1e;letter-spacing:-0.02em;">Control Center • Admin God Mode</h2>
+            <p style="font-size:12.5px;font-weight:500;color:#636366;">Gérez votre solde Yen, les probabilités RNG et vos cartes avec le design iOS 18.</p>
+          </div>
+        </div>
+        <button class="admin-close-btn" id="btn-close-admin">✕</button>
+      </div>
+
+      <div class="admin-grid">
+        <div class="admin-card">
+          <h3><span class="ios-squircle-icon ios-squircle-green" style="width:28px;height:28px;border-radius:8px;font-size:14px;">🪙</span> 1. Banque & Yen (¥)</h3>
+          <div class="admin-btn-grid">
+            <button class="adm-btn gold" data-give-coins="1000">+¥ 1,000</button>
+            <button class="adm-btn gold" data-give-coins="10000">+¥ 10,000</button>
+            <button class="adm-btn gold" data-give-coins="100000">+¥ 100,000</button>
+            <button class="adm-btn gold" data-give-coins="1000000">+¥ 1,000,000</button>
+          </div>
+          <div class="adm-row">
+            <input type="number" id="adm-custom-coins" class="adm-input" value="12024" min="0" />
+            <button class="adm-btn purple" id="adm-btn-set-coins" style="white-space:nowrap;">Définir Solde</button>
+          </div>
+          <button class="adm-btn" id="adm-toggle-free-packs">♾️ Mode Boosters Gratuits : OFF</button>
+          <div class="adm-row">
+            <span>Gain passif / sec :</span>
+            <select id="adm-passive-select" class="adm-select" style="width:155px;">
+              <option value="3">+¥ 3 / sec</option>
+              <option value="50">+¥ 50 / sec</option>
+              <option value="500">+¥ 500 / sec</option>
+              <option value="10000">+¥ 10,000 / sec</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h3><span class="ios-squircle-icon ios-squircle-purple" style="width:28px;height:28px;border-radius:8px;font-size:14px;">🎲</span> 2. Taux de Drop (RNG)</h3>
+          <div class="admin-btn-grid">
+            <button class="adm-btn" data-luck-preset="normal">🎯 Normal (2% Secret)</button>
+            <button class="adm-btn purple" data-luck-preset="lucky">🍀 Chance ×10 (20%)</button>
+            <button class="adm-btn purple" data-luck-preset="holoonly">🌈 Full Holo & Secret</button>
+            <button class="adm-btn gold" data-luck-preset="godpack">👑 100% SECRET RARE</button>
+          </div>
+          <div class="adm-slider-row">
+            <div class="adm-row"><span>★★★★ Secret Rare</span><strong id="lbl-rate-secret">2%</strong></div>
+            <input type="range" id="rng-secret" min="0" max="100" value="2" />
+          </div>
+          <div class="adm-slider-row">
+            <div class="adm-row"><span>★★★ Holo Prisme</span><strong id="lbl-rate-holo">8%</strong></div>
+            <input type="range" id="rng-holo" min="0" max="100" value="8" />
+          </div>
+          <div class="adm-slider-row">
+            <div class="adm-row"><span>★★ Rare Argent</span><strong id="lbl-rate-rare">20%</strong></div>
+            <input type="range" id="rng-rare" min="0" max="100" value="20" />
+          </div>
+          <p style="font-size:11.5px;color:#8e8e93;font-weight:600;">Reste Commun : <strong id="lbl-rate-common" style="color:#1c1c1e;">70%</strong></p>
+        </div>
+
+        <div class="admin-card">
+          <h3><span class="ios-squircle-icon ios-squircle-blue" style="width:28px;height:28px;border-radius:8px;font-size:14px;">🃏</span> 3. Spawner de Cartes (Give)</h3>
+          <select id="adm-spawn-char" class="adm-select">
+            <option value="ALL_CHARS">🌟 TOUS LES PERSONNAGES (15)</option>
+          </select>
+          <div class="adm-row">
+            <select id="adm-spawn-rarity" class="adm-select" style="flex:1;">
+              <option value="SECRET">★★★★ Secret Rare</option>
+              <option value="HOLO">★★★ Holo Prisme</option>
+              <option value="RARE">★★ Rare Argent</option>
+              <option value="COMMON">★ Commun</option>
+              <option value="ALL_RARITIES">🌈 Toutes les 4 raretés</option>
+            </select>
+            <input type="number" id="adm-spawn-qty" class="adm-input" value="1" min="1" max="999" style="width:85px;" />
+          </div>
+          <button class="adm-btn purple" id="adm-btn-spawn-card">🎁 Se Give la Carte Maintenant</button>
+          <button class="adm-btn gold" id="adm-btn-unlock-all">🏆 Débloquer 100% Collection (60/60)</button>
+        </div>
+
+        <div class="admin-card">
+          <h3><span class="ios-squircle-icon ios-squircle-orange" style="width:28px;height:28px;border-radius:8px;font-size:14px;">⚡</span> 4. Actions Turbo & Custom</h3>
+          <div class="admin-btn-grid">
+            <button class="adm-btn purple" id="adm-btn-open-10">🚀 Ouvrir ×10 Boosters</button>
+            <button class="adm-btn" id="adm-toggle-instant">⚡ Ouverture Instant : OFF</button>
+          </div>
+          <div class="adm-row">
+            <input type="text" id="adm-custom-name" class="adm-input" placeholder="Nom (ex: Sung Jin-Woo)" />
+            <input type="text" id="adm-custom-anime" class="adm-input" placeholder="Anime (ex: Solo Leveling)" />
+          </div>
+          <div class="adm-row">
+            <input type="text" id="adm-custom-move" class="adm-input" placeholder="Attaque (ex: Arise)" />
+            <input type="url" id="adm-custom-img" class="adm-input" placeholder="URL image (optionnel)" />
+          </div>
+          <button class="adm-btn gold" id="adm-btn-create-custom">✨ Créer & Give en Secret Rare</button>
+          <button class="adm-btn danger" id="adm-btn-wipe-all">🗑️ Reset Complet</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <script>
+    const BOOSTER_COST = 100;
+    const CARDS_PER_BOOSTER = 5;
+    const STORAGE_KEY = 'aether_anime_tcg_v2';
+
+    const RARITIES = {
+      COMMON: {
+        id: 'COMMON',
+        title: 'Commun',
+        stars: '★',
+        hpBonus: 0,
+        atkMultiplier: 1.0,
+        sellValue: 150,
+        flashColor: 'radial-gradient(circle, rgba(148, 163, 184, 0.75) 0%, transparent 70%)',
+        particleColors: ['#94a3b8', '#cbd5e1', '#64748b']
+      },
+      RARE: {
+        id: 'RARE',
+        title: 'Rare Argent',
+        stars: '★★',
+        hpBonus: 30,
+        atkMultiplier: 1.25,
+        sellValue: 450,
+        flashColor: 'radial-gradient(circle, rgba(56, 189, 248, 0.85) 0%, transparent 72%)',
+        particleColors: ['#38bdf8', '#bae6fd', '#e0f2fe']
+      },
+      HOLO: {
+        id: 'HOLO',
+        title: 'Holo Prisme',
+        stars: '★★★',
+        hpBonus: 70,
+        atkMultiplier: 1.6,
+        sellValue: 1400,
+        flashColor: 'radial-gradient(circle, rgba(217, 70, 239, 0.9) 0%, rgba(34, 211, 238, 0.5) 45%, transparent 75%)',
+        particleColors: ['#e879f9', '#22d3ee', '#c084fc', '#f472b6']
+      },
+      SECRET: {
+        id: 'SECRET',
+        title: 'Secret Rare',
+        stars: '★★★★',
+        hpBonus: 130,
+        atkMultiplier: 2.2,
+        sellValue: 5100,
+        flashColor: 'radial-gradient(circle, rgba(251, 191, 36, 0.98) 0%, rgba(236, 72, 153, 0.65) 45%, transparent 78%)',
+        particleColors: ['#fbbf24', '#fef08a', '#f472b6', '#22d3ee', '#ffffff']
+      }
+    };
+
+    const RARITY_ORDER = { SECRET: 4, HOLO: 3, RARE: 2, COMMON: 1 };
+
+    const FALLBACK_CHARACTERS = [
+      {
+        charId: 'slot_0', malId: 417, name: 'Lelouch Lamperouge', anime: 'Code Geass', element: '👁️',
+        baseHp: 120, moveName: 'Geass de l\'Obéissance Absolue', moveDesc: 'Prend le contrôle mental immédiat de la cible adverse.',
+        baseDmg: 90, hairColor: '#1e1b4b', eyeColor: '#e11d48', auraColor: '#a855f7',
+        image: 'https://cdn.myanimelist.net/images/characters/8/406163.jpg'
+      },
+      {
+        charId: 'slot_1', malId: 45627, name: 'Levi Ackerman', anime: 'Attack on Titan', element: '⚔️',
+        baseHp: 140, moveName: 'Tourbillon Tranchant Céleste', moveDesc: 'Frappe éclair multidirectionnelle à vitesse supersonique.',
+        baseDmg: 110, hairColor: '#0f172a', eyeColor: '#38bdf8', auraColor: '#22d3ee',
+        image: 'https://cdn.myanimelist.net/images/characters/2/241413.jpg'
+      },
+      {
+        charId: 'slot_2', malId: 40, name: 'Monkey D. Luffy', anime: 'One Piece', element: '☀️',
+        baseHp: 160, moveName: 'Bajrang Gun Gear Fifth', moveDesc: 'Libère les tambours de la libération avec une force titanesque.',
+        baseDmg: 125, hairColor: '#f8fafc', eyeColor: '#fbbf24', auraColor: '#f59e0b',
+        image: 'https://cdn.myanimelist.net/images/characters/9/310307.jpg'
+      },
+      {
+        charId: 'slot_3', malId: 71, name: 'L Lawliet', anime: 'Death Note', element: '🌌',
+        baseHp: 130, moveName: 'Déduction Absolue du Monde', moveDesc: 'Anticipe les 10 prochains coups de l\'adversaire sans faille.',
+        baseDmg: 100, hairColor: '#090d16', eyeColor: '#94a3b8', auraColor: '#6366f1',
+        image: 'https://cdn.myanimelist.net/images/characters/10/249647.jpg'
+      },
+      {
+        charId: 'slot_4', malId: 62, name: 'Roronoa Zoro', anime: 'One Piece', element: '🐉',
+        baseHp: 150, moveName: 'Roi des Enfers : Ashura', moveDesc: 'Neuf lames imprégnées du Fluide Royal fendent l\'horizon.',
+        baseDmg: 120, hairColor: '#16a34a', eyeColor: '#ef4444', auraColor: '#4ade80',
+        image: 'https://cdn.myanimelist.net/images/characters/3/100534.jpg'
+      },
+      {
+        charId: 'slot_5', malId: 80, name: 'Light Yagami', anime: 'Death Note', element: '🌑',
+        baseHp: 125, moveName: 'Sentence du Dieu Kira', moveDesc: 'Inscrit le destin final dans le carnet de l\'ombre.',
+        baseDmg: 105, hairColor: '#78350f', eyeColor: '#dc2626', auraColor: '#f43f5e',
+        image: 'https://cdn.myanimelist.net/images/characters/6/63870.jpg'
+      },
+      {
+        charId: 'slot_6', malId: 27, name: 'Killua Zoldyck', anime: 'Hunter x Hunter', element: '⚡',
+        baseHp: 135, moveName: 'Kanmuru : Vitesse Divine', moveDesc: 'Transmet des impulsions électriques directes aux réflexes.',
+        baseDmg: 110, hairColor: '#e2e8f0', eyeColor: '#3b82f6', auraColor: '#38bdf8',
+        image: 'https://cdn.myanimelist.net/images/characters/9/310307.jpg'
+      },
+      {
+        charId: 'slot_7', malId: 35252, name: 'Rintarou Okabe', anime: 'Steins;Gate', element: '⏳',
+        baseHp: 115, moveName: 'Opération Skuld : Reading Steiner', moveDesc: 'Franchit la barrière du pourcent pour réécrire le présent.',
+        baseDmg: 90, hairColor: '#1e293b', eyeColor: '#f59e0b', auraColor: '#fbbf24',
+        image: 'https://cdn.myanimelist.net/images/characters/6/122643.jpg'
+      },
+      {
+        charId: 'slot_8', malId: 11, name: 'Edward Elric', anime: 'Fullmetal Alchemist', element: '⚙️',
+        baseHp: 130, moveName: 'Transmutation Sans Cercle', moveDesc: 'Reconfigure la matière du terrain en lances d\'acier.',
+        baseDmg: 95, hairColor: '#facc15', eyeColor: '#eab308', auraColor: '#38bdf8',
+        image: 'https://cdn.myanimelist.net/images/characters/9/72533.jpg'
+      },
+      {
+        charId: 'slot_9', malId: 17, name: 'Naruto Uzumaki', anime: 'Naruto Shippuden', element: '🌀',
+        baseHp: 160, moveName: 'Mode Baryon : Rasenshuriken', moveDesc: 'Fusion nucléaire de chakra surpassant toutes les limites.',
+        baseDmg: 130, hairColor: '#fde047', eyeColor: '#ef4444', auraColor: '#fb923c',
+        image: 'https://cdn.myanimelist.net/images/characters/2/284121.jpg'
+      },
+      {
+        charId: 'slot_10', malId: 422, name: 'Guts', anime: 'Berserk', element: '🗡️',
+        baseHp: 165, moveName: 'Fureur de l\'Armure du Berserker', moveDesc: 'Ignore toute douleur pour abattre la Dragonslayer.',
+        baseDmg: 135, hairColor: '#090d16', eyeColor: '#ef4444', auraColor: '#dc2626',
+        image: 'https://cdn.myanimelist.net/images/characters/13/284123.jpg'
+      },
+      {
+        charId: 'slot_11', malId: 34470, name: 'Kurisu Makise', anime: 'Steins;Gate', element: '✨',
+        baseHp: 115, moveName: 'Divergence Temporelle 1.048596', moveDesc: 'Altère la ligne d\'univers pour annuler l\'attaque ennemie.',
+        baseDmg: 90, hairColor: '#991b1b', eyeColor: '#818cf8', auraColor: '#c084fc',
+        image: 'https://cdn.myanimelist.net/images/characters/10/114399.jpg'
+      },
+      {
+        charId: 'slot_12', malId: 164470, name: 'Satoru Gojo', anime: 'Jujutsu Kaisen', element: '🌌',
+        baseHp: 175, moveName: 'Équation Imaginaire : Violet', moveDesc: 'Fusionne l\'infini bleu et rouge pour effacer la matière.',
+        baseDmg: 145, hairColor: '#f8fafc', eyeColor: '#38bdf8', auraColor: '#a855f7',
+        image: 'https://cdn.myanimelist.net/images/characters/15/422168.jpg'
+      },
+      {
+        charId: 'slot_13', malId: 14, name: 'Itachi Uchiha', anime: 'Naruto Shippuden', element: '🔥',
+        baseHp: 140, moveName: 'Arcanes Lunaires Tsukuyomi', moveDesc: 'Plonge l\'esprit adverse dans une illusion de 72 heures.',
+        baseDmg: 115, hairColor: '#0f172a', eyeColor: '#ef4444', auraColor: '#e11d48',
+        image: 'https://cdn.myanimelist.net/images/characters/9/284122.jpg'
+      },
+      {
+        charId: 'slot_14', malId: 40882, name: 'Mikasa Ackerman', anime: 'Attack on Titan', element: '❄️',
+        baseHp: 140, moveName: 'Assaut des Lames Tonnerre', moveDesc: 'Manœuvre tridimensionnelle d\'une précision chirurgicale.',
+        baseDmg: 110, hairColor: '#0f172a', eyeColor: '#94a3b8', auraColor: '#f43f5e',
+        image: 'https://cdn.myanimelist.net/images/characters/9/215563.jpg'
+      }
+    ];
+
+    const LEGACY_ID_MAP = {
+      mal_417: 'slot_0', mal_45627: 'slot_1', mal_40: 'slot_2', mal_71: 'slot_3', mal_62: 'slot_4',
+      mal_80: 'slot_5', mal_27: 'slot_6', mal_35252: 'slot_7', mal_11: 'slot_8', mal_17: 'slot_9',
+      mal_422: 'slot_10', mal_34470: 'slot_11', mal_164471: 'slot_12', mal_164470: 'slot_12',
+      mal_14: 'slot_13', mal_40882: 'slot_14', mal_497: 'slot_11', mal_118763: 'slot_7'
+    };
+
+    const state = {
+      coins: 12024,
+      passiveRate: 3,
+      freePacksMode: false,
+      instantOpenMode: false,
+      customOdds: { SECRET: 2, HOLO: 8, RARE: 20, COMMON: 70 },
+      charactersPool: FALLBACK_CHARACTERS.map((c) => ({ ...c })),
+      nekosBackupImages: [],
+      collection: {},
+      currentBoosterCards: [],
+      activeFilter: 'ALL',
+      searchQuery: '',
+      sortBy: 'RARITY',
+      isOpeningBooster: false
+    };
+
+    function getOfflineFallbackDataURI(char) {
+      const hair = char.hairColor || '#1e1b4b';
+      const eye = char.eyeColor || '#38bdf8';
+      const aura = char.auraColor || '#c084fc';
+      const safeName = (char.name || 'Anime Hero').replace(/[<>&"']/g, '');
+
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
+        <defs>
+          <radialGradient id="bg" cx="50%" cy="42%" r="65%">
+            <stop offset="0%" stop-color="${aura}" stop-opacity="0.55"/>
+            <stop offset="55%" stop-color="#1e1b4b"/>
+            <stop offset="100%" stop-color="#070a14"/>
+          </radialGradient>
+        </defs>
+        <rect width="320" height="320" fill="url(#bg)"/>
+        <circle cx="160" cy="145" r="95" fill="none" stroke="${aura}" stroke-width="2.5" stroke-dasharray="10 6" opacity="0.7"/>
+        <path d="M55,320 L85,225 L160,250 L235,225 L265,320 Z" fill="#0f172a" stroke="${aura}" stroke-width="2"/>
+        <rect x="145" y="190" width="30" height="35" fill="#fde6ce"/>
+        <path d="M112,115 Q112,195 160,208 Q208,195 208,115 Z" fill="#ffedd5"/>
+        <ellipse cx="138" cy="148" rx="13" ry="9" fill="#0f172a"/>
+        <ellipse cx="182" cy="148" rx="13" ry="9" fill="#0f172a"/>
+        <circle cx="138" cy="148" r="6.5" fill="${eye}"/>
+        <circle cx="182" cy="148" r="6.5" fill="${eye}"/>
+        <path d="M95,145 L80,95 L112,102 L105,58 L142,82 L160,42 L182,82 L218,55 L208,102 L242,95 L224,145 Q215,98 195,95 L182,132 L168,98 L155,135 L140,98 L125,130 Q108,100 95,145 Z" fill="${hair}" stroke="${aura}" stroke-width="1.5"/>
+        <rect x="20" y="276" width="280" height="32" rx="8" fill="rgba(7,10,20,0.82)"/>
+        <text x="160" y="297" text-anchor="middle" fill="#ffffff" font-family="Plus Jakarta Sans, sans-serif" font-size="15" font-weight="800">${safeName}</text>
+      </svg>`;
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    async function resolveLiveCharacterPortrait(char) {
+      if (char._resolvedLive) return char.image;
+      char._resolvedLive = true;
+
+      try {
+        const res = await fetch('https://graphql.anilist.co', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            query: 'query ($s: String) { Character(search: $s) { image { large } } }',
+            variables: { s: char.name }
+          })
+        });
+        if (res.ok) {
+          const json = await res.json();
+          const url = json?.data?.Character?.image?.large;
+          if (url) return url;
+        }
+      } catch (e) {}
+
+      if (char.malId) {
+        try {
+          const res = await fetch(`https://api.jikan.moe/v4/characters/${char.malId}`);
+          if (res.ok) {
+            const json = await res.json();
+            const url = json?.data?.images?.jpg?.image_url || json?.data?.images?.webp?.image_url;
+            if (url) return url;
+          }
+        } catch (e) {}
+      }
+
+      const slotIdx = parseInt(String(char.charId).replace('slot_', ''), 10) || 0;
+      if (state.nekosBackupImages.length > 0) {
+        return state.nekosBackupImages[slotIdx % state.nekosBackupImages.length];
+      }
+      return null;
+    }
+
+    window.handleCardImageError = function (imgEl, charId) {
+      const char = getCharacterById(charId);
+      imgEl.onerror = null;
+      imgEl.src = getOfflineFallbackDataURI(char);
+
+      resolveLiveCharacterPortrait(char).then((liveUrl) => {
+        if (liveUrl) {
+          char.image = liveUrl;
+          document.querySelectorAll(`img[data-char-id="${char.charId}"]`).forEach((el) => {
+            el.src = liveUrl;
+          });
+        }
+      });
+    };
+
+    async function fetchAnimeCharactersFromAPI() {
+      ['slot_6', 'slot_10', 'slot_11'].forEach((id) => {
+        const charObj = getCharacterById(id);
+        if (charObj) {
+          resolveLiveCharacterPortrait(charObj).then((liveUrl) => {
+            if (liveUrl) {
+              charObj.image = liveUrl;
+              document.querySelectorAll(`img[data-char-id="${charObj.charId}"]`).forEach((el) => {
+                el.src = liveUrl;
+              });
+            }
+          });
+        }
+      });
+
+      fetch('https://nekos.best/api/v2/kitsune?amount=15')
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+          if (data && Array.isArray(data.results)) {
+            state.nekosBackupImages = data.results.map((item) => item.url).filter(Boolean);
+          }
+        })
+        .catch(() => {});
+
+      try {
+        const res = await fetch('https://api.jikan.moe/v4/top/characters?limit=15');
+        if (!res.ok) return;
+        const json = await res.json();
+        if (json && Array.isArray(json.data) && json.data.length >= 10) {
+          json.data.slice(0, 15).forEach((item, idx) => {
+            const slot = state.charactersPool[idx];
+            if (!slot) return;
+            const imgUrl = (item.images && item.images.jpg && item.images.jpg.image_url) || slot.image;
+            slot.malId = item.mal_id;
+            slot.name = item.name || slot.name;
+            slot.image = imgUrl;
+          });
+          populateAdminCharSelect();
+          renderCollectionGallery();
+          renderHUD();
+        }
+      } catch (e) {}
+    }
+
+    function getCharacterById(charId) {
+      const mappedId = LEGACY_ID_MAP[charId] || charId;
+      return (
+        state.charactersPool.find((c) => c.charId === mappedId) ||
+        FALLBACK_CHARACTERS.find((c) => c.charId === mappedId) ||
+        state.charactersPool[0]
+      );
+    }
+
+    function rollCardRarity() {
+      const rand = Math.random() * 100;
+      const s = state.customOdds.SECRET;
+      const h = state.customOdds.HOLO;
+      const r = state.customOdds.RARE;
+      if (rand < s) return 'SECRET';
+      if (rand < s + h) return 'HOLO';
+      if (rand < s + h + r) return 'RARE';
+      return 'COMMON';
+    }
+
+    function drawSingleCard() {
+      const rarity = rollCardRarity();
+      const char = state.charactersPool[Math.floor(Math.random() * state.charactersPool.length)];
+      return { charId: char.charId, rarity, flipped: false };
+    }
+
+    function addCardToCollection(charId, rarity, qty = 1) {
+      const key = `${charId}__${rarity}`;
+      if (!state.collection[key]) {
+        state.collection[key] = { key, charId, rarity, count: qty, obtainedAt: Date.now() };
+      } else {
+        state.collection[key].count += qty;
+      }
+    }
+
+    const CHARACTER_TALENTS = {
+      slot_0: { name: 'Stratégie Zéro', desc: 'Une fois pendant votre tour, vous pouvez regarder les 3 cartes du dessus du deck adverse.' },
+      slot_1: { name: 'Instinct Ackerman', desc: 'Une fois pendant votre tour, ce Héros esquive tous les effets d\'attaques rapides.' },
+      slot_2: { name: 'Tambours de Libération', desc: 'Une fois pendant votre tour, soignez 50 dégâts de ce Héros et attachez 1 Énergie.' },
+      slot_3: { name: 'Profilage Absolu', desc: 'Une fois pendant votre tour, votre adversaire dévoile sa main avant d\'attaquer.' },
+      slot_4: { name: 'Aura du Roi des Enfers', desc: 'Les attaques de ce Héros infligent 30 dégâts supplémentaires aux cibles adverses.' },
+      slot_5: { name: 'Jugement Silencieux', desc: 'Une fois pendant votre tour, placez 2 marqueurs de dégâts sur un Héros de Banc adverse.' },
+      slot_6: { name: 'Réflexes Électriques', desc: 'Ce Héros n\'a aucun coût de Retraite et attaque toujours en premier.' },
+      slot_7: { name: 'Reading Steiner', desc: 'Une fois pendant votre tour, vous pouvez relancer une pièce ou repiocher votre main.' },
+      slot_8: { name: 'Alchimie de Terrain', desc: 'Une fois pendant votre tour, cherchez une carte Énergie dans votre deck et attachez-la.' },
+      slot_9: { name: 'Chakra de Kyûbi', desc: 'Tant que ce Héros est votre Héros Actif, il régénère 30 PV entre chaque tour.' },
+      slot_10: { name: 'Marque du Sacrifice', desc: 'Plus ce Héros possède de marqueurs de dégâts, plus ses attaques gagnent +40 dégâts.' },
+      slot_11: { name: 'Logique Quantique', desc: 'Une fois pendant votre tour, piochez jusqu\'à avoir 6 cartes dans votre main.' },
+      slot_12: { name: 'Infini Intouchable', desc: 'Tant que ce Héros est en jeu, prévenez tous les dégâts infligés par des attaques de base.' },
+      slot_13: { name: 'Mangekyô Éternel', desc: 'Une fois pendant votre tour, le Héros Actif adverse est maintenant Confus et Brûlé.' },
+      slot_14: { name: 'Dévotion Écarlate', desc: 'Réduit de 30 tous les dégâts subis par ce Héros pendant le tour de votre adversaire.' }
+    };
+
+    function buildPokemonAnimeCardHTML(charId, rarityKey, countBadge = null) {
+      const char = getCharacterById(charId);
+      const rarity = RARITIES[rarityKey] || RARITIES.COMMON;
+      const finalHp = char.baseHp + rarity.hpBonus;
+      const finalDmg = Math.round(char.baseDmg * rarity.atkMultiplier);
+      const slotIdx = (parseInt(String(char.charId).replace('slot_', ''), 10) || 0) + 1;
+      const collectorNum = `${String(slotIdx + (rarityKey === 'SECRET' ? 84 : 0)).padStart(3, '0')}/084`;
+
+      const stageMap = {
+        COMMON: 'BASE',
+        RARE: 'NIVEAU 1',
+        HOLO: 'NIVEAU 2',
+        SECRET: 'NIVEAU 2'
+      };
+      const stageLabel = stageMap[rarityKey] || 'BASE';
+      const isEx = rarityKey === 'HOLO' || rarityKey === 'SECRET';
+      const orbColor = char.auraColor || '#38bdf8';
+
+      const talentObj = CHARACTER_TALENTS[char.charId] || {
+        name: 'Éveil Légendaire',
+        desc: 'Une fois pendant votre tour, vous pouvez utiliser ce talent pour soigner 40 dégâts de ce Héros.'
+      };
+
+      let sparklesHTML = '';
+      if (rarityKey === 'SECRET') {
+        const coords = [
+          [12, 14, 0.1], [86, 10, 0.5], [22, 46, 0.9], [78, 38, 1.3],
+          [10, 78, 0.3], [88, 72, 1.1], [48, 18, 0.7], [54, 86, 1.6]
+        ];
+        sparklesHTML = coords
+          .map(([x, y, d]) => `<span class="sparkle-star" style="left:${x}%;top:${y}%;animation-delay:${d}s;"></span>`)
+          .join('');
+      }
+
+      const embersHTML = `
+        <span class="art-ember" style="left:18%;animation-delay:0s;"></span>
+        <span class="art-ember" style="left:46%;animation-delay:1.1s;"></span>
+        <span class="art-ember" style="left:76%;animation-delay:2.0s;"></span>
+      `;
+
+      const costOrbsHTML = rarityKey === 'SECRET'
+        ? `
+          <span class="pkmn-mini-orb" style="background:radial-gradient(circle at 30% 30%, #4ade80, #15803d);">🌿</span>
+          <span class="pkmn-mini-orb" style="background:radial-gradient(circle at 30% 30%, #38bdf8, #0369a1);">💧</span>
+          <span class="pkmn-mini-orb" style="background:radial-gradient(circle at 30% 30%, #facc15, #b45309);">⚡</span>
+        `
+        : `
+          <span class="pkmn-mini-orb" style="background:radial-gradient(circle at 30% 30%, ${orbColor}, #0f172a);">${char.element}</span>
+          <span class="pkmn-mini-orb" style="background:radial-gradient(circle at 30% 30%, #f8fafc, #94a3b8);color:#0f172a;">✦</span>
+        `;
+
+      const bottomRightHTML = isEx
+        ? `
+          <div class="pkmn-ex-rule-box">
+            <span class="pkmn-ex-rule-title">Règle des Héros-ex</span>
+            Lorsque votre Héros-ex est mis K.O., l'adversaire récupère 2 cartes Récompense.
+          </div>
+        `
+        : `
+          <div class="pkmn-lore-text">
+            On raconte que ce héros de ${char.anime} maîtrise un pouvoir capable de briser les lois du monde.
+          </div>
+        `;
+
+      return `
+        <div class="tcg-card-3d-wrap">
+          <div class="tcg-card" data-rarity="${rarity.id}">
+            <div class="pkmn-fullart-canvas">
+              <!-- Illustration Full-Art 100% de la carte -->
+              <div class="card-art-img-holder">
+                <img
+                  class="card-art-img"
+                  data-char-id="${char.charId}"
+                  src="${char.image}"
+                  alt="${char.name}"
+                  referrerpolicy="no-referrer"
+                  onerror="window.handleCardImageError(this, '${char.charId}');"
+                />
+              </div>
+
+              <!-- Voile de lisibilité & particules -->
+              <div class="pkmn-readability-scrim"></div>
+              <div class="art-ambient-particles">${embersHTML}</div>
+              <div class="silver-glare-layer"></div>
+              <div class="holo-foil-layer"></div>
+              <div class="secret-sparkles-layer">${sparklesHTML}</div>
+
+              <!-- Superposition Pokémon Écarlate & Violet (En-tête, Talent, Attaque, Pied) -->
+              <div class="card-inner-frame">
+                <!-- 1. En-tête Pokémon -->
+                <div class="pkmn-top-section">
+                  <div class="pkmn-header-row">
+                    <div class="pkmn-left-head">
+                      <div class="pkmn-stage-stack">
+                        <span class="pkmn-stage-pill">${stageLabel}</span>
+                        <div class="pkmn-evo-portrait">
+                          <img
+                            data-char-id="${char.charId}"
+                            src="${char.image}"
+                            alt=""
+                            referrerpolicy="no-referrer"
+                            onerror="this.style.display='none';"
+                          />
+                        </div>
+                      </div>
+                      <div class="pkmn-title-group">
+                        <div class="pkmn-name-line">
+                          <span class="card-char-name" title="${char.name}">${char.name}</span>
+                          ${isEx ? `<span class="pkmn-ex-badge">ex</span>` : ''}
+                        </div>
+                        <span class="pkmn-origin-bar">Origine : ${char.anime}</span>
+                      </div>
+                    </div>
+
+                    <div class="pkmn-hp-cluster">
+                      <span class="pkmn-pv-label">PV</span>
+                      <span class="pkmn-pv-value">${finalHp}</span>
+                      <span class="pkmn-energy-sphere" style="background:radial-gradient(circle at 30% 30%, ${orbColor}, #0f172a);">
+                        ${char.element}
+                      </span>
+                    </div>
+                  </div>
+
+                  ${rarityKey === 'SECRET' ? `<div class="pkmn-teracristal-banner">✦ Téracristal</div>` : ''}
+                </div>
+
+                <!-- 2. Zone centrale/basse : Talent rouge + Attaque avec orbes -->
+                <div class="pkmn-Play-zone">
+                  <div class="pkmn-talent-box">
+                    <div class="pkmn-talent-header">
+                      <span class="pkmn-talent-pill">Talent</span>
+                      <span class="pkmn-talent-name">${talentObj.name}</span>
+                    </div>
+                    <div class="pkmn-outlined-desc">${talentObj.desc}</div>
+                  </div>
+
+                  <div class="pkmn-attack-box">
+                    <div class="pkmn-attack-row">
+                      <div class="pkmn-cost-orbs">${costOrbsHTML}</div>
+                      <span class="pkmn-attack-title">${char.moveName}</span>
+                      <span class="pkmn-attack-dmg">${finalDmg}${rarityKey === 'SECRET' ? '×' : ''}</span>
+                    </div>
+                    <div class="pkmn-outlined-desc">${char.moveDesc}</div>
+                  </div>
+                </div>
+
+                <!-- 3. Pied de carte : Barre Faiblesse/Résistance/Retraite + Codes Collector -->
+                <div class="pkmn-bottom-section">
+                  <div class="pkmn-stat-strip">
+                    <span class="pkmn-stat-cell">Faiblesse <span>⚡×2</span></span>
+                    <span class="pkmn-stat-cell">Résistance <span>🛡️-30</span></span>
+                    <span class="pkmn-stat-cell">Retraite <span>✦✦</span></span>
+                  </div>
+
+                  <div class="pkmn-footer-meta">
+                    <div class="pkmn-collector-left">
+                      <span class="pkmn-illus-line">Illus. Studio Aether</span>
+                      <div class="pkmn-set-codes">
+                        <span class="pkmn-reg-box">J</span>
+                        <span class="pkmn-set-box">AET FR</span>
+                        <span class="pkmn-serial-text">${collectorNum}</span>
+                        <span class="pkmn-rarity-star">${rarity.stars}</span>
+                        ${countBadge !== null ? `<span class="dupe-count-badge">×${countBadge}</span>` : ''}
+                      </div>
+                    </div>
+                    ${bottomRightHTML}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function bindInteractive3DCards(rootContainer = document) {
+      const cards = rootContainer.querySelectorAll('.tcg-card');
+      cards.forEach((card) => {
+        if (card.dataset.bound3d === 'true') return;
+        card.dataset.bound3d = 'true';
+
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const px = Math.max(0, Math.min(100, (x / rect.width) * 100));
+          const py = Math.max(0, Math.min(100, (y / rect.height) * 100));
+          const normX = x / rect.width - 0.5;
+          const normY = y / rect.height - 0.5;
+
+          card.classList.add('is-interacting');
+          card.style.setProperty('--rx', `${(-normY * 28).toFixed(2)}deg`);
+          card.style.setProperty('--ry', `${(normX * 28).toFixed(2)}deg`);
+          card.style.setProperty('--px', `${px.toFixed(1)}%`);
+          card.style.setProperty('--py', `${py.toFixed(1)}%`);
+          card.style.setProperty('--par-x', `${(-normX * 12).toFixed(1)}px`);
+          card.style.setProperty('--par-y', `${(-normY * 12).toFixed(1)}px`);
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.classList.remove('is-interacting');
+          card.style.setProperty('--rx', '0deg');
+          card.style.setProperty('--ry', '0deg');
+          card.style.setProperty('--px', '50%');
+          card.style.setProperty('--py', '50%');
+          card.style.setProperty('--par-x', '0px');
+          card.style.setProperty('--par-y', '0px');
+        });
+      });
+    }
+
+    function spawnBoosterBurstParticles(bestRarityKey) {
+      const layer = document.getElementById('burst-particles-layer');
+      layer.innerHTML = '';
+      const rarityInfo = RARITIES[bestRarityKey] || RARITIES.COMMON;
+      const colors = rarityInfo.particleColors;
+
+      for (let i = 0; i < 38; i++) {
+        const p = document.createElement('div');
+        p.className = 'burst-particle';
+        const angle = (Math.PI * 2 * i) / 38;
+        const distance = 110 + Math.random() * 240;
+        const size = 6 + Math.random() * 9;
+        p.style.width = `${size}px`;
+        p.style.height = `${size}px`;
+        p.style.background = colors[i % colors.length];
+        p.style.setProperty('--tx', `${(Math.cos(angle) * distance).toFixed(0)}px`);
+        p.style.setProperty('--ty', `${(Math.sin(angle) * distance).toFixed(0)}px`);
+        layer.appendChild(p);
+      }
+
+      const flashEl = document.getElementById('arena-flash');
+      flashEl.style.background = rarityInfo.flashColor;
+      flashEl.classList.remove('active');
+      void flashEl.offsetWidth;
+      flashEl.classList.add('active');
+    }
+
+    function openBoosterSequence() {
+      if (state.isOpeningBooster) return;
+      const effectiveCost = state.freePacksMode ? 0 : BOOSTER_COST;
+      if (state.coins < effectiveCost) {
+        showToast(`Solde insuffisant (¥ ${effectiveCost} requis). Utilisez l'Admin Panel (⚡) !`);
+        return;
+      }
+
+      state.isOpeningBooster = true;
+      state.coins -= effectiveCost;
+      renderHUD();
+
+      const drawn = [];
+      let bestRarity = 'COMMON';
+      for (let i = 0; i < CARDS_PER_BOOSTER; i++) {
+        const card = drawSingleCard();
+        if (state.instantOpenMode) card.flipped = true;
+        drawn.push(card);
+        addCardToCollection(card.charId, card.rarity);
+        if (RARITY_ORDER[card.rarity] > RARITY_ORDER[bestRarity]) {
+          bestRarity = card.rarity;
+        }
+      }
+      state.currentBoosterCards = drawn;
+      saveState();
+
+      const closedView = document.getElementById('booster-closed-view');
+      const drawnView = document.getElementById('drawn-cards-view');
+      const packEl = document.getElementById('booster-pack-el');
+
+      if (state.instantOpenMode) {
+        spawnBoosterBurstParticles(bestRarity);
+        closedView.style.display = 'none';
+        renderDrawnBoosterCards();
+        drawnView.classList.add('visible');
+        renderCollectionGallery();
+        renderHUD();
+        state.isOpeningBooster = false;
+        return;
+      }
+
+      drawnView.classList.remove('visible');
+      closedView.style.display = 'flex';
+      packEl.classList.remove('shaking');
+      void packEl.offsetWidth;
+      packEl.classList.add('shaking');
+
+      setTimeout(() => spawnBoosterBurstParticles(bestRarity), 620);
+
+      setTimeout(() => {
+        packEl.classList.remove('shaking');
+        closedView.style.display = 'none';
+        renderDrawnBoosterCards();
+        drawnView.classList.add('visible');
+        renderCollectionGallery();
+        renderHUD();
+        state.isOpeningBooster = false;
+      }, 900);
+    }
+
+    function renderDrawnBoosterCards() {
+      const row = document.getElementById('drawn-cards-row');
+      row.innerHTML = state.currentBoosterCards
+        .map(
+          (item, idx) => `
+          <div class="flip-slot ${item.flipped ? 'is-flipped' : ''}" data-slot-idx="${idx}">
+            <div class="flip-inner">
+              <div class="flip-back tease-${item.rarity}">
+                <div class="back-pokeball-ring">✦</div>
+                <span style="font-size:11px;font-weight:700;color:var(--text-muted);">CLIQUER POUR RÉVÉLER</span>
+              </div>
+              <div class="flip-front">
+                ${buildPokemonAnimeCardHTML(item.charId, item.rarity)}
+              </div>
+            </div>
+          </div>
+        `
+        )
+        .join('');
+
+      bindInteractive3DCards(row);
+
+      row.querySelectorAll('.flip-slot').forEach((slotEl) => {
+        slotEl.addEventListener('click', () => {
+          const idx = Number(slotEl.dataset.slotIdx);
+          if (!state.currentBoosterCards[idx].flipped) {
+            state.currentBoosterCards[idx].flipped = true;
+            slotEl.classList.add('is-flipped');
+          }
+        });
+      });
+    }
+
+    function calculateDuplicatesValue() {
+      let totalCoins = 0;
+      let totalDupes = 0;
+      Object.values(state.collection).forEach((entry) => {
+        if (entry.count > 1) {
+          const dupes = entry.count - 1;
+          totalDupes += dupes;
+          totalCoins += dupes * (RARITIES[entry.rarity]?.sellValue || 150);
+        }
+      });
+      return { totalCoins, totalDupes };
+    }
+
+    function sellAllDuplicates() {
+      const { totalCoins, totalDupes } = calculateDuplicatesValue();
+      if (totalDupes <= 0) return;
+      Object.values(state.collection).forEach((entry) => {
+        if (entry.count > 1) entry.count = 1;
+      });
+      state.coins += totalCoins;
+      saveState();
+      renderHUD();
+      renderCollectionGallery();
+      showToast(`♻️ ${totalDupes} doublon(s) vendu(s) pour +¥ ${totalCoins.toLocaleString('en-US')} !`);
+    }
+
+    function sellSingleDuplicate(collectionKey) {
+      const entry = state.collection[collectionKey];
+      if (!entry || entry.count <= 1) return;
+      const price = RARITIES[entry.rarity]?.sellValue || 150;
+      entry.count -= 1;
+      state.coins += price;
+      saveState();
+      renderHUD();
+      renderCollectionGallery();
+      showToast(`Doublon vendu : +¥ ${price.toLocaleString('en-US')}`);
+    }
+
+    function renderHUD() {
+      const entries = Object.values(state.collection);
+      const uniqueCount = entries.length;
+      const totalPossible = state.charactersPool.length * 4;
+      const totalCards = entries.reduce((acc, item) => acc + item.count, 0);
+
+      document.getElementById('hud-unique-count').textContent = `${uniqueCount} / ${totalPossible}`;
+      document.getElementById('hud-total-cards').textContent = totalCards;
+      document.getElementById('hud-coins').textContent = `¥ ${state.coins.toLocaleString('en-US')}`;
+      document.getElementById('nav-coins-val').textContent = `¥ ${state.coins.toLocaleString('en-US')}`;
+      document.getElementById('hud-passive-rate').textContent = `+${state.passiveRate}/s`;
+
+      // Synchronisation des widgets spatiaux iOS 18 sur l'écran d'accueil
+      document.getElementById('hero-unique-stat').textContent = `${uniqueCount} / ${totalPossible} Cartes`;
+      const pct = totalPossible > 0 ? Math.min(100, Math.round((uniqueCount / totalPossible) * 100)) : 0;
+      document.getElementById('hero-progress-fill').style.width = `${pct}%`;
+      document.getElementById('hero-passive-stat').textContent = `+¥ ${state.passiveRate}/s`;
+      document.getElementById('hero-secret-rate').textContent = `Secret Rare : ${state.customOdds.SECRET}%`;
+
+      const { totalCoins, totalDupes } = calculateDuplicatesValue();
+      const btnSellDupes = document.getElementById('btn-sell-all-dupes');
+      btnSellDupes.disabled = totalDupes === 0;
+      btnSellDupes.textContent = `♻️ Vendre doublons (${totalDupes}) (+¥ ${totalCoins.toLocaleString('en-US')})`;
+
+      const effectiveCost = state.freePacksMode ? 0 : BOOSTER_COST;
+      const canAfford = state.coins >= effectiveCost;
+      document.getElementById('btn-open-booster').disabled = !canAfford;
+      document.getElementById('btn-open-another').disabled = !canAfford;
+
+      document.querySelectorAll('.booster-cost-pill').forEach((pill) => {
+        pill.textContent = state.freePacksMode ? 'GRATUIT' : `¥ ${BOOSTER_COST}`;
+      });
+
+      document.getElementById('pill-odd-common').textContent = `★ Commun : ${state.customOdds.COMMON}%`;
+      document.getElementById('pill-odd-rare').textContent = `★★ Rare : ${state.customOdds.RARE}%`;
+      document.getElementById('pill-odd-holo').textContent = `★★★ Holo : ${state.customOdds.HOLO}%`;
+      document.getElementById('pill-odd-secret').textContent = `★★★★ Secret Rare : ${state.customOdds.SECRET}%`;
+
+      const counts = { ALL: entries.length, SECRET: 0, HOLO: 0, RARE: 0, COMMON: 0 };
+      entries.forEach((e) => {
+        if (counts[e.rarity] !== undefined) counts[e.rarity]++;
+      });
+      document.getElementById('count-all').textContent = counts.ALL;
+      document.getElementById('count-secret').textContent = counts.SECRET;
+      document.getElementById('count-holo').textContent = counts.HOLO;
+      document.getElementById('count-rare').textContent = counts.RARE;
+      document.getElementById('count-common').textContent = counts.COMMON;
+
+      // Synchronisation des compteurs de la barre latérale SLMobbin
+      const slAll = document.getElementById('sl-badge-all');
+      const slSecret = document.getElementById('sl-badge-secret');
+      const slHolo = document.getElementById('sl-badge-holo');
+      const slDupes = document.getElementById('sl-badge-dupes');
+      if (slAll) slAll.textContent = counts.ALL;
+      if (slSecret) slSecret.textContent = counts.SECRET;
+      if (slHolo) slHolo.textContent = counts.HOLO;
+      if (slDupes) slDupes.textContent = totalDupes > 0 ? `+¥ ${totalCoins.toLocaleString('en-US')}` : '0';
+    }
+
+    function renderCollectionGallery() {
+      const grid = document.getElementById('collection-grid');
+      const q = (state.searchQuery || '').trim().toLowerCase();
+
+      // Mode Lexicon (Pokédex complet des 60 personnages)
+      if (state.activeFilter === 'LEXICON') {
+        const ownedByChar = {};
+        Object.values(state.collection).forEach((entry) => {
+          const prev = ownedByChar[entry.charId];
+          if (!prev || RARITY_ORDER[entry.rarity] > RARITY_ORDER[prev.rarity]) {
+            ownedByChar[entry.charId] = entry;
+          }
+        });
+
+        const chars = state.charactersPool.filter((c) => {
+          if (!q) return true;
+          return c.name.toLowerCase().includes(q) || c.anime.toLowerCase().includes(q) || c.element.includes(q);
+        });
+
+        if (chars.length === 0) {
+          grid.innerHTML = `<div class="collection-empty">Aucun personnage ne correspond à "${state.searchQuery}".</div>`;
+          return;
+        }
+
+        grid.innerHTML = chars
+          .map((c) => {
+            const bestOwned = ownedByChar[c.charId];
+            const rarityToShow = bestOwned ? bestOwned.rarity : 'COMMON';
+            const countToShow = bestOwned ? bestOwned.count : 1;
+            return `
+              <div class="collection-item-wrapper ${bestOwned ? '' : 'unowned-lexicon'}">
+                ${buildPokemonAnimeCardHTML(c.charId, rarityToShow, countToShow)}
+              </div>
+            `;
+          })
+          .join('');
+
+        bindInteractive3DCards(grid);
+        return;
+      }
+
+      let allEntries = Object.values(state.collection);
+
+      // Filtre Starter Board (Top 12 cartes les plus puissantes en PV)
+      if (state.activeFilter === 'STARTER') {
+        allEntries = allEntries
+          .slice()
+          .sort((a, b) => {
+            const charA = getCharacterById(a.charId);
+            const charB = getCharacterById(b.charId);
+            const hpA = Math.round(charA.baseHp * (RARITIES[a.rarity]?.statMult || 1));
+            const hpB = Math.round(charB.baseHp * (RARITIES[b.rarity]?.statMult || 1));
+            return hpB - hpA;
+          })
+          .slice(0, 12);
+      } else {
+        allEntries = allEntries.filter(
+          (entry) => state.activeFilter === 'ALL' || entry.rarity === state.activeFilter
+        );
+      }
+
+      // Recherche texte en direct (Search ⌘ + K)
+      if (q) {
+        allEntries = allEntries.filter((entry) => {
+          const c = getCharacterById(entry.charId);
+          return (
+            c.name.toLowerCase().includes(q) ||
+            c.anime.toLowerCase().includes(q) ||
+            c.moveName.toLowerCase().includes(q)
+          );
+        });
+      }
+
+      // Tri dynamique
+      if (state.activeFilter !== 'STARTER') {
+        allEntries.sort((a, b) => {
+          const charA = getCharacterById(a.charId);
+          const charB = getCharacterById(b.charId);
+          if (state.sortBy === 'HP') {
+            const hpA = Math.round(charA.baseHp * (RARITIES[a.rarity]?.statMult || 1));
+            const hpB = Math.round(charB.baseHp * (RARITIES[b.rarity]?.statMult || 1));
+            return hpB - hpA;
+          }
+          if (state.sortBy === 'DUPES') {
+            return b.count - a.count || RARITY_ORDER[b.rarity] - RARITY_ORDER[a.rarity];
+          }
+          if (state.sortBy === 'NAME') {
+            return charA.name.localeCompare(charB.name);
+          }
+          const rDiff = RARITY_ORDER[b.rarity] - RARITY_ORDER[a.rarity];
+          return rDiff !== 0 ? rDiff : b.count - a.count;
+        });
+      }
+
+      if (allEntries.length === 0) {
+        grid.innerHTML = `<div class="collection-empty">Aucune carte trouvée dans cette vue. Ouvrez un booster avec le bouton "+ Ouvrir un Booster" à gauche !</div>`;
+        return;
+      }
+
+      grid.innerHTML = allEntries
+        .map((entry) => {
+          const sellVal = RARITIES[entry.rarity]?.sellValue || 150;
+          const hasDupe = entry.count > 1;
+          return `
+            <div class="collection-item-wrapper">
+              ${buildPokemonAnimeCardHTML(entry.charId, entry.rarity, entry.count)}
+              ${
+                hasDupe
+                  ? `<button class="sell-single-btn" data-sell-key="${entry.key}">♻️ Vendre 1 doublon (+¥ ${sellVal})</button>`
+                  : ''
+              }
+            </div>
+          `;
+        })
+        .join('');
+
+      bindInteractive3DCards(grid);
+    }
+
+    function populateAdminCharSelect() {
+      const selectEl = document.getElementById('adm-spawn-char');
+      if (!selectEl) return;
+      selectEl.innerHTML = [
+        `<option value="ALL_CHARS">🌟 TOUS LES PERSONNAGES (${state.charactersPool.length})</option>`,
+        ...state.charactersPool.map((c) => `<option value="${c.charId}">${c.element} ${c.name} (${c.anime})</option>`)
+      ].join('');
+    }
+
+    function applyAdminOdds(secret, holo, rare) {
+      const s = Math.max(0, Math.min(100, Math.round(Number(secret))));
+      const h = Math.max(0, Math.min(100 - s, Math.round(Number(holo))));
+      const r = Math.max(0, Math.min(100 - s - h, Math.round(Number(rare))));
+      const c = Math.max(0, 100 - s - h - r);
+
+      state.customOdds = { SECRET: s, HOLO: h, RARE: r, COMMON: c };
+      document.getElementById('rng-secret').value = s;
+      document.getElementById('rng-holo').value = h;
+      document.getElementById('rng-rare').value = r;
+      document.getElementById('lbl-rate-secret').textContent = `${s}%`;
+      document.getElementById('lbl-rate-holo').textContent = `${h}%`;
+      document.getElementById('lbl-rate-rare').textContent = `${r}%`;
+      document.getElementById('lbl-rate-common').textContent = `${c}%`;
+      renderHUD();
+    }
+
+    function adminOpenTenBoostersFast() {
+      let secretCount = 0;
+      let lastFive = [];
+      for (let p = 0; p < 10; p++) {
+        const pack = [];
+        for (let i = 0; i < CARDS_PER_BOOSTER; i++) {
+          const card = drawSingleCard();
+          card.flipped = true;
+          pack.push(card);
+          addCardToCollection(card.charId, card.rarity, 1);
+          if (card.rarity === 'SECRET') secretCount++;
+        }
+        lastFive = pack;
+      }
+      state.currentBoosterCards = lastFive;
+      saveState();
+      document.getElementById('booster-closed-view').style.display = 'none';
+      renderDrawnBoosterCards();
+      document.getElementById('drawn-cards-view').classList.add('visible');
+      renderCollectionGallery();
+      renderHUD();
+      showToast(`🚀 10 Boosters ouverts ! Secret Rares : ${secretCount}`);
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({
+            coins: state.coins,
+            collection: state.collection,
+            customChars: state.charactersPool.filter((c) => c.isCustom)
+          })
+        );
+      } catch (e) {}
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (typeof parsed.coins === 'number' && !Number.isNaN(parsed.coins)) {
+          state.coins = Math.max(0, Math.floor(parsed.coins));
+        }
+        if (Array.isArray(parsed.customChars)) {
+          parsed.customChars.forEach((cc) => {
+            if (!state.charactersPool.some((c) => c.charId === cc.charId)) state.charactersPool.push(cc);
+          });
+        }
+        if (parsed.collection && typeof parsed.collection === 'object') {
+          const migrated = {};
+          Object.values(parsed.collection).forEach((entry) => {
+            if (!entry || !entry.charId || !entry.rarity) return;
+            const normId = LEGACY_ID_MAP[entry.charId] || entry.charId;
+            const newKey = `${normId}__${entry.rarity}`;
+            if (!migrated[newKey]) {
+              migrated[newKey] = { key: newKey, charId: normId, rarity: entry.rarity, count: entry.count || 1 };
+            } else {
+              migrated[newKey].count += entry.count || 1;
+            }
+          });
+          state.collection = migrated;
+        }
+      } catch (e) {}
+    }
+
+    function showToast(text) {
+      const stack = document.getElementById('toast-stack');
+      const div = document.createElement('div');
+      div.className = 'toast-msg';
+      div.textContent = text;
+      stack.appendChild(div);
+      setTimeout(() => div.remove(), 3000);
+    }
+
+    function openTCGDrawer(scrollToSection = null) {
+      const drawer = document.getElementById('tcg-drawer');
+      const workspaceMain = document.getElementById('studio-workspace-main');
+      const gachaArena = document.getElementById('section-boosters');
+      drawer.classList.add('open');
+
+      if (scrollToSection === 'collection') {
+        gachaArena?.classList.add('collapsed-stage');
+        const btnToggleStage = document.getElementById('btn-toggle-booster-stage');
+        if (btnToggleStage) btnToggleStage.textContent = 'Afficher Studio ▾';
+        if (workspaceMain) workspaceMain.scrollTop = 0;
+      } else if (scrollToSection === 'boosters') {
+        gachaArena?.classList.remove('collapsed-stage');
+        const btnToggleStage = document.getElementById('btn-toggle-booster-stage');
+        if (btnToggleStage) btnToggleStage.textContent = 'Masquer Studio ▴';
+        if (workspaceMain) workspaceMain.scrollTop = 0;
+      }
+    }
+
+    function setStudioFilterView(filterKey, labelText) {
+      state.activeFilter = filterKey;
+      document.querySelectorAll('.filter-btn').forEach((b) => {
+        b.classList.toggle('active', b.dataset.filter === filterKey);
+      });
+      document.querySelectorAll('[data-sl-filter]').forEach((b) => {
+        b.classList.toggle('active', b.dataset.slFilter === filterKey);
+      });
+      const bc = document.getElementById('studio-breadcrumb-current');
+      const titleEl = document.getElementById('collection-section-title');
+      if (bc && labelText) bc.textContent = labelText;
+      if (titleEl && labelText) titleEl.textContent = labelText;
+      renderCollectionGallery();
+    }
+
+    function initEvents() {
+      // Boutons du Hero Revolut -> Ouvre la Collection / Boosters
+      document.getElementById('btn-hero-explore').addEventListener('click', () => openTCGDrawer('collection'));
+      document.getElementById('nav-login-btn').addEventListener('click', () => openTCGDrawer('collection'));
+      document.getElementById('nav-signup-btn').addEventListener('click', () => openTCGDrawer('boosters'));
+
+      document.querySelectorAll('[data-open-drawer]').forEach((link) => {
+        link.addEventListener('click', () => openTCGDrawer(link.dataset.openDrawer));
+      });
+
+      document.getElementById('btn-close-drawer').addEventListener('click', () => {
+        document.getElementById('tcg-drawer').classList.remove('open');
+      });
+
+      // Actions de la barre latérale gauche (style SLMobbin)
+      document.getElementById('sl-nav-home').addEventListener('click', () => {
+        document.getElementById('tcg-drawer').classList.remove('open');
+      });
+
+      document.getElementById('sl-btn-create-booster').addEventListener('click', () => {
+        const gachaArena = document.getElementById('section-boosters');
+        gachaArena.classList.remove('collapsed-stage');
+        document.getElementById('btn-toggle-booster-stage').textContent = 'Masquer Studio ▴';
+        document.getElementById('studio-workspace-main').scrollTo({ top: 0, behavior: 'smooth' });
+        openBoosterSequence();
+      });
+
+      document.getElementById('sl-nav-replay').addEventListener('click', () => {
+        const gachaArena = document.getElementById('section-boosters');
+        gachaArena.classList.remove('collapsed-stage');
+        document.getElementById('btn-toggle-booster-stage').textContent = 'Masquer Studio ▴';
+        document.getElementById('studio-workspace-main').scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      document.getElementById('sl-nav-data-toggle').addEventListener('click', () => {
+        const sublist = document.getElementById('sl-data-sublist');
+        const chev = document.getElementById('sl-data-chevron');
+        sublist.classList.toggle('collapsed');
+        chev.style.transform = sublist.classList.contains('collapsed') ? 'rotate(-90deg)' : 'rotate(0deg)';
+      });
+
+      const filterLabels = {
+        ALL: 'Toutes les cartes',
+        SECRET: 'Téracristal EX (★★★★)',
+        HOLO: 'Illustration Holo (★★★)',
+        RARE: 'Rare Argent (★★)',
+        COMMON: 'Base & Commun (★)',
+        LEXICON: 'Lexicon • Index des 60 Héros',
+        STARTER: 'Starter Board • Top 12 PV'
+      };
+
+      document.querySelectorAll('[data-sl-filter]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const fk = btn.dataset.slFilter;
+          setStudioFilterView(fk, filterLabels[fk] || 'Collection');
+          document.getElementById('section-collection')?.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // Recherche en direct (Search ⌘ + K)
+      const searchInput = document.getElementById('sl-sidebar-search');
+      searchInput.addEventListener('input', (e) => {
+        state.searchQuery = e.target.value;
+        renderCollectionGallery();
+      });
+
+      // Tri
+      document.getElementById('studio-sort-select').addEventListener('change', (e) => {
+        state.sortBy = e.target.value;
+        renderCollectionGallery();
+      });
+
+      // Plier / Déplier le studio Booster
+      document.getElementById('btn-toggle-booster-stage').addEventListener('click', () => {
+        const gachaArena = document.getElementById('section-boosters');
+        const collapsed = gachaArena.classList.toggle('collapsed-stage');
+        document.getElementById('btn-toggle-booster-stage').textContent = collapsed
+          ? 'Afficher Studio ▾'
+          : 'Masquer Studio ▴';
+      });
+
+      // Basculer Thème Clair Perle / Obsidian Holo
+      const toggleStudioTheme = () => {
+        const drawer = document.getElementById('tcg-drawer');
+        const isObsidian = drawer.getAttribute('data-studio-theme') === 'obsidian';
+        const nextTheme = isObsidian ? 'light' : 'obsidian';
+        drawer.setAttribute('data-studio-theme', nextTheme);
+        document.getElementById('btn-toggle-studio-theme').textContent =
+          nextTheme === 'obsidian' ? '☀️ Mode Clair' : '🌙 Mode Obsidian';
+      };
+      document.getElementById('btn-toggle-studio-theme').addEventListener('click', toggleStudioTheme);
+      document.getElementById('sl-brand-switcher').addEventListener('click', toggleStudioTheme);
+
+      // Boutons du bas de la sidebar (God Pack, Grille, Aide, Settings, Réduire)
+      document.getElementById('sl-btn-godpack').addEventListener('click', () => {
+        applyAdminOdds(100, 0, 0);
+        const gachaArena = document.getElementById('section-boosters');
+        gachaArena.classList.remove('collapsed-stage');
+        document.getElementById('btn-toggle-booster-stage').textContent = 'Masquer Studio ▴';
+        document.getElementById('studio-workspace-main').scrollTo({ top: 0, behavior: 'smooth' });
+        showToast('💎 Mode God Pack (100% Téracristal EX) activé !');
+        openBoosterSequence();
+      });
+
+      document.getElementById('sl-tool-grid').addEventListener('click', () => {
+        const grid = document.getElementById('collection-grid');
+        const isCompact = grid.classList.toggle('compact-binder');
+        showToast(isCompact ? '⊞ Vue Classeur Compacte activée' : '⊞ Vue Galerie Standard activée');
+      });
+
+      document.getElementById('sl-tool-help').addEventListener('click', () => {
+        showToast(
+          `📊 Taux actuels — EX: ${state.customOdds.SECRET}% | Holo: ${state.customOdds.HOLO}% | Rare: ${state.customOdds.RARE}%`
+        );
+      });
+
+      const sidebarEl = document.getElementById('sl-sidebar');
+      const btnExpandSidebar = document.getElementById('btn-expand-sidebar');
+      document.getElementById('sl-tool-collapse').addEventListener('click', () => {
+        sidebarEl.classList.add('collapsed');
+        btnExpandSidebar.style.display = 'inline-flex';
+      });
+      btnExpandSidebar.addEventListener('click', () => {
+        sidebarEl.classList.remove('collapsed');
+        btnExpandSidebar.style.display = 'none';
+      });
+
+      document.getElementById('sl-pin-sell-dupes').addEventListener('click', sellAllDuplicates);
+
+      // Boosters & Collection
+      document.getElementById('btn-open-booster').addEventListener('click', openBoosterSequence);
+      document.getElementById('booster-pack-el').addEventListener('click', openBoosterSequence);
+      document.getElementById('btn-open-another').addEventListener('click', openBoosterSequence);
+
+      document.getElementById('btn-reveal-all').addEventListener('click', () => {
+        state.currentBoosterCards.forEach((c) => { c.flipped = true; });
+        document.querySelectorAll('#drawn-cards-row .flip-slot').forEach((s) => s.classList.add('is-flipped'));
+      });
+
+      document.getElementById('btn-sell-all-dupes').addEventListener('click', sellAllDuplicates);
+
+      document.getElementById('collection-filters').addEventListener('click', (e) => {
+        const btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        const fk = btn.dataset.filter;
+        setStudioFilterView(fk, filterLabels[fk] || 'Collection');
+      });
+
+      document.getElementById('collection-grid').addEventListener('click', (e) => {
+        const sellBtn = e.target.closest('.sell-single-btn');
+        if (!sellBtn || sellBtn.disabled) return;
+        sellSingleDuplicate(sellBtn.dataset.sellKey);
+      });
+
+      // Admin Modal
+      const adminModal = document.getElementById('admin-modal');
+      const openAdmin = () => {
+        populateAdminCharSelect();
+        adminModal.classList.add('open');
+      };
+      document.getElementById('btn-open-admin').addEventListener('click', openAdmin);
+      document.getElementById('sl-pin-admin').addEventListener('click', openAdmin);
+      document.getElementById('sl-tool-settings').addEventListener('click', openAdmin);
+      document.getElementById('nav-admin-link').addEventListener('click', openAdmin);
+      document.getElementById('btn-hero-admin').addEventListener('click', openAdmin);
+      document.getElementById('nav-wallet-pill').addEventListener('click', openAdmin);
+      document.getElementById('ios-widget-admin').addEventListener('click', openAdmin);
+      document.getElementById('ios-widget-collection').addEventListener('click', () => openTCGDrawer('collection'));
+      document.getElementById('btn-close-admin').addEventListener('click', () => adminModal.classList.remove('open'));
+      adminModal.addEventListener('click', (e) => {
+        if (e.target === adminModal) adminModal.classList.remove('open');
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          openTCGDrawer('collection');
+          document.getElementById('sl-sidebar-search')?.focus();
+        } else if (e.key === 'F2') {
+          e.preventDefault();
+          populateAdminCharSelect();
+          adminModal.classList.toggle('open');
+        } else if (e.key === 'Escape') {
+          adminModal.classList.remove('open');
+        }
+      });
+
+      document.querySelectorAll('[data-give-coins]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const amount = Number(btn.dataset.giveCoins) || 0;
+          state.coins += amount;
+          saveState();
+          renderHUD();
+          showToast(`+¥ ${amount.toLocaleString('en-US')} ajoutés !`);
+        });
+      });
+
+      document.getElementById('adm-btn-set-coins').addEventListener('click', () => {
+        state.coins = Math.max(0, Math.floor(Number(document.getElementById('adm-custom-coins').value) || 0));
+        saveState();
+        renderHUD();
+        showToast(`Solde défini à ¥ ${state.coins.toLocaleString('en-US')}`);
+      });
+
+      const btnFreePacks = document.getElementById('adm-toggle-free-packs');
+      btnFreePacks.addEventListener('click', () => {
+        state.freePacksMode = !state.freePacksMode;
+        btnFreePacks.classList.toggle('active-toggle', state.freePacksMode);
+        btnFreePacks.textContent = `♾️ Mode Boosters Gratuits : ${state.freePacksMode ? 'ON' : 'OFF'}`;
+        renderHUD();
+      });
+
+      document.getElementById('adm-passive-select').addEventListener('change', (e) => {
+        state.passiveRate = Number(e.target.value) || 3;
+        renderHUD();
+      });
+
+      document.querySelectorAll('[data-luck-preset]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const p = btn.dataset.luckPreset;
+          if (p === 'normal') applyAdminOdds(2, 8, 20);
+          else if (p === 'lucky') applyAdminOdds(20, 35, 30);
+          else if (p === 'holoonly') applyAdminOdds(50, 50, 0);
+          else if (p === 'godpack') applyAdminOdds(100, 0, 0);
+          showToast(`Probabilités mises à jour !`);
+        });
+      });
+
+      ['rng-secret', 'rng-holo', 'rng-rare'].forEach((id) => {
+        document.getElementById(id).addEventListener('input', () => {
+          applyAdminOdds(
+            document.getElementById('rng-secret').value,
+            document.getElementById('rng-holo').value,
+            document.getElementById('rng-rare').value
+          );
+        });
+      });
+
+      document.getElementById('adm-btn-spawn-card').addEventListener('click', () => {
+        const charTarget = document.getElementById('adm-spawn-char').value;
+        const rarityTarget = document.getElementById('adm-spawn-rarity').value;
+        const qty = Math.max(1, Math.min(999, Math.floor(Number(document.getElementById('adm-spawn-qty').value) || 1)));
+        const targetChars = charTarget === 'ALL_CHARS' ? state.charactersPool.map((c) => c.charId) : [charTarget];
+        const targetRarities = rarityTarget === 'ALL_RARITIES' ? ['COMMON', 'RARE', 'HOLO', 'SECRET'] : [rarityTarget];
+
+        let totalAdded = 0;
+        targetChars.forEach((cId) => {
+          targetRarities.forEach((rKey) => {
+            addCardToCollection(cId, rKey, qty);
+            totalAdded += qty;
+          });
+        });
+        saveState();
+        renderHUD();
+        renderCollectionGallery();
+        showToast(`🎁 +${totalAdded} carte(s) ajoutée(s) !`);
+      });
+
+      document.getElementById('adm-btn-unlock-all').addEventListener('click', () => {
+        state.charactersPool.forEach((char) => {
+          ['COMMON', 'RARE', 'HOLO', 'SECRET'].forEach((rKey) => {
+            addCardToCollection(char.charId, rKey, 1);
+          });
+        });
+        saveState();
+        renderHUD();
+        renderCollectionGallery();
+        showToast('🏆 100% de la collection débloquée !');
+      });
+
+      document.getElementById('adm-btn-open-10').addEventListener('click', () => {
+        openTCGDrawer('boosters');
+        adminOpenTenBoostersFast();
+      });
+
+      const btnInstant = document.getElementById('adm-toggle-instant');
+      btnInstant.addEventListener('click', () => {
+        state.instantOpenMode = !state.instantOpenMode;
+        btnInstant.classList.toggle('active-toggle', state.instantOpenMode);
+        btnInstant.textContent = `⚡ Ouverture Instant : ${state.instantOpenMode ? 'ON' : 'OFF'}`;
+      });
+
+      document.getElementById('adm-btn-create-custom').addEventListener('click', () => {
+        const name = document.getElementById('adm-custom-name').value.trim() || 'Sung Jin-Woo';
+        const anime = document.getElementById('adm-custom-anime').value.trim() || 'Solo Leveling';
+        const moveName = document.getElementById('adm-custom-move').value.trim() || 'Arise : Monarque';
+        const customImg = document.getElementById('adm-custom-img').value.trim();
+
+        const newCharId = `slot_custom_${Date.now()}`;
+        const newChar = {
+          charId: newCharId, malId: 9999, name, anime, element: '👑',
+          baseHp: 190, moveName, moveDesc: 'Héros forgé via Console Admin.', baseDmg: 160,
+          hairColor: '#1e1b4b', eyeColor: '#a855f7', auraColor: '#fbbf24', isCustom: true,
+          image: customImg || ''
+        };
+        if (!newChar.image) newChar.image = getOfflineFallbackDataURI(newChar);
+        state.charactersPool.unshift(newChar);
+        addCardToCollection(newCharId, 'SECRET', 1);
+        populateAdminCharSelect();
+        saveState();
+        renderHUD();
+        renderCollectionGallery();
+        showToast(`✨ Carte Custom "${name}" créée !`);
+      });
+
+      document.getElementById('adm-btn-wipe-all').addEventListener('click', () => {
+        localStorage.removeItem(STORAGE_KEY);
+        state.coins = 12024;
+        state.collection = {};
+        state.currentBoosterCards = [];
+        saveState();
+        renderHUD();
+        renderCollectionGallery();
+        showToast('🗑️ Sauvegarde réinitialisée.');
+      });
+
+      setInterval(() => {
+        state.coins += state.passiveRate;
+        renderHUD();
+      }, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadState();
+      populateAdminCharSelect();
+      initEvents();
+      renderHUD();
+      renderCollectionGallery();
+      fetchAnimeCharactersFromAPI();
+    });
+  </script>
+</body>
+</html>
